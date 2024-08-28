@@ -68,6 +68,10 @@
   }
 }
 
+.active {
+  @apply bg-gray-300 text-gray-900 font-bold;
+}
+
 /* scrollbar css */
 /* width */
 ::-webkit-scrollbar {

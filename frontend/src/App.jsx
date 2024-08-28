@@ -5,6 +5,10 @@ import Dashboard from "./pages/Dashboard";
 import RequireAuth from "./components/Auth/RequireAuth";
 import Register from "./pages/Register";
 import Verification from "./pages/Verification";
+import DashBoardLayout from "./components/Layouts/DashBoardLayout";
+import ContentSubmission from "./pages/ContentSubmission";
+import MyContents from "./pages/MyContents";
+import MyProfile from "./pages/MyProfile";
 
 const App = () => {
   return (
@@ -21,9 +25,19 @@ const App = () => {
            protected routes
           ============== */}
 
-          <Route element={<RequireAuth />}>
+          {/* <Route element={<RequireAuth />}> */}
+          {/* dashboard routes start */}
+          <Route element={<DashBoardLayout />}>
             <Route path={routes.dashboard} element={<Dashboard />} />
+            <Route
+              path={routes.contentSubmission}
+              element={<ContentSubmission />}
+            />
+            <Route path={routes.mycontent} element={<MyContents />} />
+            <Route path={routes.myprofile} element={<MyProfile />} />
           </Route>
+          {/* dashboard routes end */}
+          {/* </Route> */}
         </Route>
       </Routes>
     </>

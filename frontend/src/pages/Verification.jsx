@@ -59,9 +59,9 @@ const Verification = () => {
             </form>
             {/* post data */}
             {post && (
-              <div className="mt-6 space-y-3">
+              <div className="mt-4 space-y-3">
                 {post.caption && (
-                  <p className="text-sm font-bold text-gray-600">
+                  <p className="text-xs font-bold text-muted-foreground">
                     {post.caption}
                   </p>
                 )}

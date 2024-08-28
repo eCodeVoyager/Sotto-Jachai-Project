@@ -26,16 +26,10 @@ const Verification = () => {
         <div className="w-full sm:w-1/2 mx-auto h-screen flex items-center justify-center">
           <div className="w-full h-[90%] overflow-y-auto border border-gray-500 p-3 rounded-lg">
             <h2 className="text-center text-xl md:text-2xl font-bold text-gray-900 capitalize">
-              Verification your infomation
+              Verify your infomation
             </h2>
             <form className="mt-3 lg:mt-6" onSubmit={handleSubmit}>
               <div className="space-y-2">
-                <label
-                  htmlFor="key"
-                  className="font-medium text-lg text-gray-800"
-                >
-                  Key
-                </label>
                 <div className="relative">
                   <Input
                     ref={inputRef}

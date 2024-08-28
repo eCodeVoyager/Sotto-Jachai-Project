@@ -16,9 +16,14 @@ const Sidebar = () => {
           <div className="flex flex-col items-center">
             <figure className="size-36 border rounded-full border-gray-500 flex items-center justify-center bg-slate-500 text-slate-100">
               {/* FIX: logo will here                     */}
-              <h5 className="text-4xl font-extralight text-center">
+              {/* <h5 className="text-4xl font-extralight text-center">
                 Sotto <span>Jacai</span>
-              </h5>
+              </h5> */}
+              <img
+                src="/logo.jpg"
+                alt=""
+                className="size-full object-cover rounded-full object-top"
+              />
             </figure>
             <div className="text-center mt-4">
               <h2 className="font-medium text-gray-900 text-xl">

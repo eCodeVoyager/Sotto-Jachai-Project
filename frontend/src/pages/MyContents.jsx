@@ -1,4 +1,10 @@
+import PostsListing from "@/components/common/posts/PostsListing";
+
 const MyContents = () => {
-  return <div>MyContents</div>;
+  return (
+    <>
+      <PostsListing title={"My Content"} />
+    </>
+  );
 };
 export default MyContents;

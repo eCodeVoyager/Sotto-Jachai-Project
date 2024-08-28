@@ -3,7 +3,7 @@ import PostsListing from "@/components/common/posts/PostsListing";
 
 const Dashboard = () => {
   return (
-    <section className="max-w-4xl">
+    <section className="">
       <h2 className="text2xl lg:text-4xl font-extralight uppercase  border-b border-b-gray-400 pb-3 mb-3">
         Dashboard
       </h2>

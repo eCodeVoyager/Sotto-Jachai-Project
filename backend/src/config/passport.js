@@ -1,7 +1,6 @@
 // - npm packages
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
 const passportKeys = require('./passportKeys');
 const userService = require('../modules/users/services/userService');
 
@@ -38,4 +37,6 @@ passport.use(
     }
   )
 );
+
+
 

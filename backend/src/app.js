@@ -13,9 +13,14 @@ const bodyParser = require("body-parser");
 // Import routes
 const { auth, verify, content } = require("./index");
 
-
-
 const app = express();
+
+
+//set trust proxy
+app.set("trust proxy", 1);
+
+// - Configure passport strategies
+require('./config/passport');
 
 //Middlewares
 const allMiddlewares = [
@@ -49,11 +54,7 @@ app.use("/api/v1/verify", verify.verifyRoutes);
 app.use("/api/v1/content", content.contentRoutes);
 
 // Error handling middleware
-const {
-  errorHandler,
-  notFoundHandler,
-  
-} = require("./utils/errorHandler");
+const { errorHandler, notFoundHandler } = require("./utils/errorHandler");
 
 app.use(notFoundHandler);
 app.use(errorHandler);

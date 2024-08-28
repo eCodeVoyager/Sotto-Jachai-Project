@@ -1,8 +1,8 @@
-const http = require('http');
+const http = require("http");
 
-const app = require('./app');
-const connectDB = require('./config/db');
-const checkEnvVariables = require('./utils/envChecker');
+const app = require("./app");
+const connectDB = require("./config/db");
+const checkEnvVariables = require("./utils/envChecker");
 
 // Connect to the database and check environment variables
 connectDB();

@@ -1,7 +1,6 @@
 //src/modules/users/models/userModel.js
 
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
   googleId: String,

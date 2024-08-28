@@ -10,8 +10,8 @@ const Sidebar = () => {
     <>
       {/* sidebar */}
 
-      <aside>
-        <div className="w-64 h-screen bg-gray-200 overflow-y-auto py-3">
+      <aside className="w-64 min-h-screen bg-gray-200 overflow-y-auto ">
+        <div className="py-3">
           {/* profile info */}
           <div className="flex flex-col items-center">
             <figure className="size-36 border rounded-full border-gray-500 flex items-center justify-center bg-slate-500 text-slate-100">

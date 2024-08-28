@@ -4,10 +4,12 @@ import Sidebar from "../common/Sidebar";
 const DashBoardLayout = () => {
   return (
     <>
-      <section className="flex gap-4">
+      <main className="flex md:pe-4">
         <Sidebar />
-        <Outlet />
-      </section>
+        <div className="w-full *:ps-4 *:h-full *:overflow-y-auto py-4">
+          <Outlet />
+        </div>
+      </main>
     </>
   );
 };

@@ -9,6 +9,7 @@ import DashBoardLayout from "./components/Layouts/DashBoardLayout";
 import ContentSubmission from "./pages/ContentSubmission";
 import MyContents from "./pages/MyContents";
 import MyProfile from "./pages/MyProfile";
+import AdminLogin from "./pages/AdminLogin";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
               ============= */}
           <Route path={routes.login} element={<Login />} />
           <Route path={routes.register} element={<Register />} />
+          <Route path={routes.adminLogin} element={<AdminLogin />} />
           <Route path={routes.verification} element={<Verification />} />
           {/*==============
            protected routes

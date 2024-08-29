@@ -18,6 +18,14 @@ export default {
     },
     extend: {
       colors: {
+        custom: {
+          DEFAULT: "#112D4E",
+          100: "#3F72AF",
+          50: "#DBE2EF",
+        },
+        text: {
+          DEFAULT: "#4D5959",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

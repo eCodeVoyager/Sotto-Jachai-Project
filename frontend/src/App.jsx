@@ -33,8 +33,8 @@ const App = () => {
               path={routes.contentSubmission}
               element={<ContentSubmission />}
             />
-            <Route path={routes.mycontent} element={<MyContents />} />
-            <Route path={routes.myprofile} element={<MyProfile />} />
+            <Route path={routes.myContent} element={<MyContents />} />
+            <Route path={routes.myProfile} element={<MyProfile />} />
           </Route>
           {/* dashboard routes end */}
           {/* </Route> */}

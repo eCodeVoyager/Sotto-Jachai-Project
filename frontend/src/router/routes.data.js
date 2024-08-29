@@ -1,8 +1,8 @@
 export const routes = {
   dashboard: "/",
   contentSubmission: "/content-submission",
-  mycontent: "/mycontent",
-  myprofile: "/myprofile",
+  myContent: "/mycontent",
+  myProfile: "/myprofile",
   login: "/login",
   register: "/register",
   verification: "/verification",
@@ -19,11 +19,11 @@ export const navigation = [
   {
     id: "4",
     title: "My Contents",
-    href: routes.mycontent,
+    href: routes.myContent,
   },
   {
     id: "2",
     title: "My Profile",
-    href: routes.myprofile,
+    href: routes.myProfile,
   },
 ];

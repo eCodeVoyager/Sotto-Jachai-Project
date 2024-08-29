@@ -1,10 +1,7 @@
+import { MyContentsIcon } from "@/components/common/Icons";
 import PostsListing from "@/components/common/posts/PostsListing";
 
-const myContents = () => {
-  return (
-    <>
-      <PostsListing title={"My Content"} />
-    </>
-  );
+const MyContents = () => {
+  return <PostsListing title={"My Content"} Icon={MyContentsIcon} limit={3} />;
 };
-export default myContents;
+export default MyContents;

@@ -4,18 +4,31 @@ const router = require("express").Router();
 const authenticate = require("../../../middlewares/authMiddleware");
 const contentController = require("../controllers/contentController");
 const upload = require("../../../middlewares/multerMiddleware");
+const authorize = require("../../../middlewares/rbacMiddleware");
 
 router.use(authenticate);
-router.post("/", upload.array("content", 5), contentController.submitContent);
+router.post(
+  "/",
+  authorize(["submitContent"]),
+  upload.array("content", 5),
+  contentController.submitContent
+);
 router.get("/my-contents", contentController.getContentByLoggedInUser);
 
-router.put("/verify/:id", contentController.verifyContent);
+router.put(
+  "/verify/:id",
+  authorize(["verifyContent"]),
+  contentController.verifyContent
+);
 
-router.get("/", contentController.getContents);
+router.get("/", authorize(["getContents"]), contentController.getContents);
 
-router.delete("/:id", contentController.deleteContent);
+router.delete(
+  "/:id",
+  authorize(["deleteContent"]),
+  contentController.deleteContent
+);
 
-router.get("/:id", contentController.getContent);
-
+router.get("/:id", authorize(["getContent"]), contentController.getContent);
 
 module.exports = router;

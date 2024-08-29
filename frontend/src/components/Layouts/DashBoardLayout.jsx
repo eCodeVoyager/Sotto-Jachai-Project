@@ -8,7 +8,7 @@ const DashBoardLayout = () => {
         <aside className="md:px-5 flex items-center ">
           <Sidebar />
         </aside>
-        <div className="w-full">
+        <div className="w-full mt-12 md:mt-0">
           <Outlet />
         </div>
       </main>

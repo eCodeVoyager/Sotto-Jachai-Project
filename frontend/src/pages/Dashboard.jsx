@@ -1,14 +1,12 @@
 import ContentUpload from "@/components/common/ContentUpload";
 import PostsListing from "@/components/common/posts/PostsListing";
+import { Clock } from "lucide-react";
 
 const Dashboard = () => {
   return (
-    <section className="">
-      <h2 className="text2xl lg:text-4xl font-extralight uppercase  border-b border-b-gray-400 pb-3 mb-3">
-        Dashboard
-      </h2>
+    <section className="px-4 lg:px-0">
       <ContentUpload />
-      <PostsListing title={"Your Resent Contents"} />
+      <PostsListing title={"Recent Uploads"} Icon={Clock} />
     </section>
   );
 };

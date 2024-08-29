@@ -1,21 +1,19 @@
 import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
-
+import upload from "@/assets/icons/upload.svg";
+import newDocs from "@/assets/icons/dashboard_upload_heading.svg";
 const ContentUpload = () => {
   return (
-    <div className="max-w-2xl h-[80px] relative">
-      <Textarea placeholder="Type your message here." className="resize-none" />
-      <div className="absolute right-1 bottom-1">
-        <Button size="sm">
-          <label
-            htmlFor="caption_image"
-            className="h-full w-full flex items-center justify-center"
-          >
-            <input type="file" name="caption_image" id="caption_image" hidden />
-            Upload Media
-          </label>
-        </Button>
+    <div className="bg-custom  text-white flex items-center gap-3 justify-center py-4 w-full 2xl:max-w-[50%] mx-auto rounded-2xl flex-col sm:flex-row">
+      <div className="hidden md:block">
+        <img src={newDocs} alt="newDocsIcon" />
       </div>
+      <h2 className="font-openSans font-bold text-lg lg:text-2xl">
+        Please upload your contents here{" "}
+      </h2>
+      <Button className="gap-2">
+        <img src={upload} alt="upload" />
+        <span className="font-openSans font-bold text-base">Upload</span>
+      </Button>
     </div>
   );
 };

@@ -65,7 +65,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-openSans;
   }
 }
 .active {
@@ -78,6 +78,10 @@
   }
 }
 /* scrollbar css */
+.scrollBarHidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 /* width */
 ::-webkit-scrollbar {
   @apply w-2;
@@ -90,10 +94,5 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-800 rounded-2xl;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-700;
+  @apply bg-custom-100 rounded-2xl;
 }

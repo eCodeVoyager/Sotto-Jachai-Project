@@ -83,7 +83,7 @@ const verifyContent = async (req, res, next) => {
   try {
     const content = await contentService.verifyContent(
       req.params.id,
-      req.body.status
+      req.query.status
     );
     return res
       .status(httpStatus.OK)
@@ -110,13 +110,48 @@ const getContents = async (req, res, next) => {
       filter.status = req.query.status;
     }
     const contents = await contentService.getContents(filter);
+    if (!contents || contents.length === 0) {
+      return res
+        .status(httpStatus.NOT_FOUND)
+        .json(
+          new ApiResponse(
+            httpStatus.NOT_FOUND,
+            null,
+            "No contents found for this query"
+          )
+        );
+    }
     return res
       .status(httpStatus.OK)
       .json(
         new ApiResponse(
           httpStatus.OK,
-          contents,
+          { contents },
           "Contents retrieved successfully"
+        )
+      );
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getContent = async (req, res, next) => {
+  try {
+    const content = await contentService.getContent(req.params.id);
+    if (!content) {
+      return res
+        .status(httpStatus.NOT_FOUND)
+        .json(
+          new ApiResponse(httpStatus.NOT_FOUND, null, "Content not found ")
+        );
+    }
+    return res
+      .status(httpStatus.OK)
+      .json(
+        new ApiResponse(
+          httpStatus.OK,
+          content,
+          "Content retrieved successfully"
         )
       );
   } catch (error) {
@@ -138,6 +173,19 @@ const getContentByLoggedInUser = async (req, res, next) => {
     const contents = await contentService.getContents({
       submittedBy: req.user.id,
     });
+
+    if (!contents || contents.length === 0) {
+      return res
+        .status(httpStatus.NOT_FOUND)
+        .json(
+          new ApiResponse(
+            httpStatus.NOT_FOUND,
+            null,
+            "No contents found for this user"
+          )
+        );
+    }
+
     return res
       .status(httpStatus.OK)
       .json(
@@ -151,7 +199,6 @@ const getContentByLoggedInUser = async (req, res, next) => {
     next(error);
   }
 };
-
 /**
  * Deletes content.
  * @param {Object} req - The request object.
@@ -165,13 +212,9 @@ const deleteContent = async (req, res, next) => {
   try {
     await contentService.deleteContent(req.params.id);
     return res
-      .status(httpStatus.NO_CONTENT)
+      .status(httpStatus.OK)
       .json(
-        new ApiResponse(
-          httpStatus.NO_CONTENT,
-          null,
-          "Content deleted successfully"
-        )
+        new ApiResponse(httpStatus.OK, null, "Content deleted successfully")
       );
   } catch (error) {
     next(error);
@@ -182,6 +225,7 @@ module.exports = {
   submitContent,
   verifyContent,
   getContents,
+  getContent,
   deleteContent,
   getContentByLoggedInUser,
 };

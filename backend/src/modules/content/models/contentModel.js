@@ -8,12 +8,16 @@ const contentSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ["pending", "approved", "rejected"],
+    enum: ["pending", "verified", "rejected"],
   },
   submittedBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
+  },
+  keyId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Verify",
   },
 });
 

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const keySchema = new mongoose.Schema({
+const verifySchema = new mongoose.Schema({
   contentId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -13,4 +13,4 @@ const keySchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Key", keySchema);
+module.exports = mongoose.model("Verify", verifySchema);

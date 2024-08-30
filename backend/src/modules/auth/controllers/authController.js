@@ -1,11 +1,9 @@
-
 const httpStatus = require("http-status");
 
 const ApiError = require("../../../utils/apiError");
 const ApiResponse = require("../../../utils/apiResponse");
 const { generateAccessToken } = require("../../../utils/jwtToken");
 const userService = require("../../users/services/userService");
-
 
 const registerUser = async (req, res, next) => {
   try {
@@ -54,6 +52,15 @@ const loginUser = async (req, res, next) => {
 const registerAdmin = async (req, res, next) => {
   try {
     req.body.role = "admin";
+    if (req.body.adminSecret !== process.env.ADMIN_SECRET) {
+      return res.json(
+        new ApiResponse(
+          httpStatus.UNAUTHORIZED,
+          null,
+          " Admin secret is incorrect"
+        )
+      );
+    }
     const user = await userService.createUser(req.body);
     const token = generateAccessToken(user, { role: "admin" });
     return res.json(

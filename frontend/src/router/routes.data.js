@@ -47,4 +47,10 @@ export const adminNavigation = [
     href: routes.adminAllContent,
     icon: MyContentsIcon,
   },
+  {
+    id: "8",
+    title: "Create new content",
+    href: routes.contentSubmission,
+    icon: MyContentsIcon,
+  },
 ];

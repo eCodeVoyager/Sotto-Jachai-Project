@@ -11,6 +11,7 @@ const ContentService = {
   getSingleContent: async (postId) => requests.get(`/content/${postId}`),
   getMyContent: async () => requests.get("/content/my-contents"),
   deleteContent: async (postId) => requests.delete(`/content/${postId}`),
+  verifyPost: async (key) => requests.get(`/verify/${key}`),
 };
 
 export default ContentService;

@@ -41,8 +41,8 @@ const PostsListing = ({ fromPage, Icon, title, contents, limit = 3 }) => {
       ) : (
         <>
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <h3 className="text-2xl lg:text-4xl font-semibold text-text">
-              No posts to show.
+            <h3 className="text-xl lg:text-4xl font-semibold text-text whitespace-nowrap">
+              No posts to show 🙂
             </h3>
           </div>
         </>

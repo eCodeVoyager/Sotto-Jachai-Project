@@ -2,8 +2,8 @@ import PostCard from "@/components/common/posts/PostCard";
 import Navbar from "@/components/shared/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { demoPost } from "@/data/posts.data";
 import { routes } from "@/router/routes.data";
+import ContentService from "@/services/ContentService";
 import { Formik } from "formik";
 import { Key, Loader2, ShieldCheck } from "lucide-react";
 import { useState } from "react";
@@ -35,8 +35,22 @@ const Verification = () => {
                 }}
                 onSubmit={(values, { setSubmitting }) => {
                   console.log(values.key);
-                  setPost(demoPost);
-                  setSubmitting(false);
+                  ContentService.verifyPost(values.key)
+                    .then(({ data }) => {
+                      console.log(data);
+                      setPost(data);
+                      setSubmitting(false);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                      values.key = "";
+                      toast.error(
+                        error.response?.data?.message ||
+                          error.message ||
+                          "Failed to verify."
+                      );
+                      setSubmitting(false);
+                    });
                 }}
               >
                 {({
@@ -101,7 +115,7 @@ const Verification = () => {
                   ? "Your Information is verified by Authority."
                   : "Your Information is not verified by Authority."}
               </h2>
-              <div className="mt-6">
+              <div className="mt-12">
                 <PostCard post={post} fromPage={routes.verification} />
               </div>
             </div>

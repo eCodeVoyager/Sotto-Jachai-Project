@@ -7,8 +7,8 @@ export const fetchUsersContents = createAsyncThunk(
       const { data } = await AdminService.getAllContents();
       return data.contents;
     } catch (error) {
-      console.log("Error while fetching user contents. from admin");
-      console.log(error);
+      // console.log("Error while fetching user contents. from admin");
+      // console.log(error);
       return rejectWithValue(error);
     }
   }

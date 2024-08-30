@@ -117,8 +117,8 @@ const ContentSubmission = () => {
               </div>
               <div className="mt-6">
                 {preview ? (
-                  <div className="flex items-center justify-center flex-col">
-                    <figure className="h-[400px]">
+                  <div className="flex items-center justify-center flex-col h-[250px] md:h-[400px]">
+                    <figure className="h-full">
                       <img
                         className="object-contain h-full"
                         src={preview}

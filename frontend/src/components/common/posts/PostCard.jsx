@@ -73,7 +73,7 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
           {post.title}
         </h4>
 
-        {user.role !== "admin" && (
+        {user?.role !== "admin" && (
           <p className="mt-2 text-muted-foreground text-sm">{post.text}</p>
         )}
         <Button
@@ -112,14 +112,14 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
           ) : (
             <div>
               <p className="font-semibold  text-sm text-red-400">
-                {user.role === "admin"
+                {user?.role === "admin"
                   ? "Post is not approved yet."
                   : "Your post is not approved yet."}
               </p>
             </div>
           )}
         </div>
-        {user.role === "admin" && (
+        {user?.role === "admin" && (
           <div className="mt-4 flex items-center gap-7 ">
             {post.status === "verified" && (
               <Button

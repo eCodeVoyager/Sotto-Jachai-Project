@@ -55,7 +55,7 @@ const Sidebar = () => {
             ))}
           </ul>
         </div>
-        <div className="h-30 hidden md:flex items-start flex-col gap-y-4">
+        <div className="h-30 hidden md:flex items-start flex-col gap-y-4 ps-2">
           <div className="flex justify-center gap-3">
             <figure>
               <img src={profile_icon_sidebar} alt="profile_icon_sidebar" />
@@ -91,6 +91,17 @@ const Sidebar = () => {
                   </Link>
                 </DropdownMenuItem>
               ))}
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Button
+                  onClick={handleLogOut}
+                  variant="ghost"
+                  className="gap-3 p-0"
+                >
+                  <LogOut className="size-4" />
+                  <p>Logout</p>
+                </Button>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

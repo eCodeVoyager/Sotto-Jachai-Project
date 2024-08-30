@@ -12,16 +12,16 @@ const verifyModel = require("../../verify/models/verifyModel");
  */
 const submitContent = async (contentBody, userId) => {
   try {
-    const content = new contentModel({
+    const contentMain = new contentModel({
       ...contentBody,
       status: "pending",
       submittedBy: userId,
     });
-    await content.save();
-    const updatedContent = await contentModel
-      .findById(content._id)
+    await contentMain.save();
+    const content = await contentModel
+      .findById(contentMain._id)
       .populate("submittedBy", "role email _id");
-    return { updatedContent };
+    return { content };
   } catch (error) {
     throw error;
   }

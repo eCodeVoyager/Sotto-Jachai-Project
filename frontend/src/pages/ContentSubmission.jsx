@@ -55,8 +55,8 @@ const ContentSubmission = () => {
             formData.append("content", uploadedFiles);
             ContentService.create(formData)
               .then(({ data }) => {
-                console.log(data);
-                dispatch(createContent(data));
+                console.log(data.content);
+                dispatch(createContent(data.content));
                 toast.success("Content created successfully.");
                 setSubmitting(false);
                 values.title = "";

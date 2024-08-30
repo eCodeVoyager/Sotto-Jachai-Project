@@ -1,5 +1,4 @@
 import Container from "@/components/common/Container";
-import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/router/routes.data";
 import { Link } from "react-router-dom";
 import Cookie from "js-cookie";

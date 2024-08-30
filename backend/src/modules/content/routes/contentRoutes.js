@@ -7,21 +7,22 @@ const upload = require("../../../middlewares/multerMiddleware");
 const authorize = require("../../../middlewares/rbacMiddleware");
 
 router.use(authenticate);
+router.get("/", authorize(["getContents"]), contentController.getContents);
+router.get("/my-contents", contentController.getContentByLoggedInUser);
+router.get("/:id", authorize(["getContent"]), contentController.getContent);
+
 router.post(
   "/",
   authorize(["submitContent"]),
   upload.array("content", 5),
   contentController.submitContent
 );
-router.get("/my-contents", contentController.getContentByLoggedInUser);
-
 router.put(
   "/verify/:id",
   authorize(["verifyContent"]),
   contentController.verifyContent
 );
 
-router.get("/", authorize(["getContents"]), contentController.getContents);
 
 router.delete(
   "/:id",
@@ -29,6 +30,5 @@ router.delete(
   contentController.deleteContent
 );
 
-router.get("/:id", authorize(["getContent"]), contentController.getContent);
 
 module.exports = router;

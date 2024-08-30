@@ -7,17 +7,17 @@ const navData = [
   {
     id: 1,
     title: "Home",
-    href: "/",
+    href: routes.verification,
   },
   {
     id: 2,
     title: "About",
-    href: "#",
+    href: routes.about,
   },
   {
     id: 4,
     title: "Contact",
-    href: "#",
+    href: routes.contact,
   },
 ];
 const Navbar = () => {

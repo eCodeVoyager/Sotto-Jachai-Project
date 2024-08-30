@@ -14,6 +14,9 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminAllContents from "./pages/Admin/AdminAllContents";
 import AdminRegister from "./pages/AdminRegister";
 import { useSelector } from "react-redux";
+import About from "./pages/About";
+import BasicLayout from "./components/Layouts/BasicLayout";
+import Contact from "./pages/Contact";
 
 const App = () => {
   const { user } = useSelector((state) => state.auth);
@@ -28,7 +31,11 @@ const App = () => {
           <Route path={routes.register} element={<Register />} />
           <Route path={routes.adminRegister} element={<AdminRegister />} />
           <Route path={routes.adminLogin} element={<AdminLogin />} />
-          <Route path={routes.verification} element={<Verification />} />
+          <Route element={<BasicLayout />}>
+            <Route path={routes.verification} element={<Verification />} />
+            <Route path={routes.about} element={<About />} />
+            <Route path={routes.contact} element={<Contact />} />
+          </Route>
           {/*==============
            protected routes
           ============== */}

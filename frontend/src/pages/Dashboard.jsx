@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const { contents, isLoading } = useSelector((state) => state.content);
+
   return (
     <section className="px-4 lg:px-0  mt-12 md:mt-0">
       <ContentUpload />

@@ -1,6 +1,8 @@
 import { DashboardIcon, MyContentsIcon } from "@/components/common/Icons";
 
 export const routes = {
+  about: "/about",
+  contact: "/contact",
   verification: "/",
   dashboard: "/dashboard",
   contentSubmission: "/content-submission",

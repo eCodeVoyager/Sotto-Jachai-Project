@@ -1,5 +1,4 @@
 import PostCard from "@/components/common/posts/PostCard";
-import Navbar from "@/components/shared/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { routes } from "@/router/routes.data";
@@ -13,7 +12,6 @@ const Verification = () => {
   const [post, setPost] = useState(null);
   return (
     <>
-      <Navbar />
       <section className="mt-12 px-4 md:px-0">
         <div className="flex items-center gap-4 justify-center font-bold text-text">
           <ShieldCheck className="size-7 lg:size-10" />

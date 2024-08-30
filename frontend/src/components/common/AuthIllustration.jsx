@@ -1,7 +1,11 @@
 const AuthIllustration = () => {
   return (
-    <div className="hidden md:block bg-gray-900 flex-[.6]">
-      {/* illustration */}
+    <div className="hidden md:block  flex-[.6] h-full">
+      <img
+        src="/images/authIllustration.svg"
+        alt="authIllustration"
+        className="w-[80%]"
+      />
     </div>
   );
 };

@@ -29,10 +29,10 @@ const DashBoardLayout = () => {
         dispatch(fetchLoginUserContents());
       } else if (user.role === "admin") {
         dispatch(fetchUsersContents());
-        navigate(routes.adminDashboard);
       }
     }
   }, [user]);
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">

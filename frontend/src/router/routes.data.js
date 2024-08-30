@@ -10,7 +10,6 @@ export const routes = {
   adminRegister: "/admin/register",
   verification: "/verification",
   adminAllContent: "/admin/allcontent",
-  adminDashboard: "/admin/dashboard",
 };
 
 // dashboard navigation
@@ -33,7 +32,7 @@ export const adminNavigation = [
   {
     id: "1",
     title: "Dashboard",
-    href: routes.adminDashboard,
+    href: routes.dashboard,
     icon: DashboardIcon,
   },
   {

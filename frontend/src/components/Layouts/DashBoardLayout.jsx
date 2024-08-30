@@ -8,19 +8,30 @@ import { routes } from "@/router/routes.data";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import { fetchLoginUserContents } from "@/redux/app/content/fetchLoginUserContents";
+import { fetchUsersContents } from "@/redux/app/admin/fetchUsersContents";
 
 const DashBoardLayout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, isAuthenticated } = useSelector((state) => state.auth);
+  const { user, isLoading, isAuthenticated } = useSelector(
+    (state) => state.auth
+  );
   useEffect(() => {
     if (Cookie.get("token")) {
       dispatch(fetchLogInUser());
-      dispatch(fetchLoginUserContents());
     } else {
       navigate(routes.login, { replace: true });
     }
   }, []);
+  useEffect(() => {
+    if (user) {
+      if (user.role === "user") {
+        dispatch(fetchLoginUserContents());
+      } else if (user.role === "admin") {
+        dispatch(fetchUsersContents());
+      }
+    }
+  }, [user]);
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">

@@ -12,6 +12,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminRequire from "./components/Auth/AdminRequire";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminAllContents from "./pages/Admin/AdminAllContents";
+import AdminRegister from "./pages/AdminRegister";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
               ============= */}
           <Route path={routes.login} element={<Login />} />
           <Route path={routes.register} element={<Register />} />
+          <Route path={routes.adminRegister} element={<AdminRegister />} />
           <Route path={routes.adminLogin} element={<AdminLogin />} />
           <Route path={routes.verification} element={<Verification />} />
           {/*==============

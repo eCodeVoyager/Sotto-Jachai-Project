@@ -1,4 +1,4 @@
-const Content = require("../models/contentModel");
+const contentModel = require("../models/contentModel");
 const { generateKey } = require("../../../utils/hashUtils");
 const ApiError = require("../../../utils/apiError");
 const httpStatus = require("http-status");
@@ -12,14 +12,16 @@ const verifyModel = require("../../verify/models/verifyModel");
  */
 const submitContent = async (contentBody, userId) => {
   try {
-    const content = new Content({
+    const content = new contentModel({
       ...contentBody,
       status: "pending",
       submittedBy: userId,
     });
     await content.save();
-
-    return { content };
+    const updatedContent = await contentModel
+      .findById(content._id)
+      .populate("submittedBy", "role email _id");
+    return { updatedContent };
   } catch (error) {
     throw error;
   }
@@ -33,7 +35,7 @@ const submitContent = async (contentBody, userId) => {
  */
 const verifyContent = async (contentId, status) => {
   try {
-    const content = await Content.findById(contentId);
+    const content = await contentModel.findById(contentId);
     if (!content) {
       throw error;
     }
@@ -61,7 +63,7 @@ const verifyContent = async (contentId, status) => {
 
 const getContents = async (filter) => {
   try {
-    return await Content.find(filter).populate([
+    return await contentModel.find(filter).populate([
       {
         path: "submittedBy",
         select: "role email _id",
@@ -78,7 +80,7 @@ const getContents = async (filter) => {
 
 const getContent = async (contentId) => {
   try {
-    return await Content.findById(contentId).populate([
+    return await contentModel.findById(contentId).populate([
       {
         path: "submittedBy",
         select: "role email _id",
@@ -95,7 +97,7 @@ const getContent = async (contentId) => {
 
 const deleteContent = async (contentId) => {
   try {
-    const content = await Content.findByIdAndDelete(contentId);
+    const content = await contentModel.findByIdAndDelete(contentId);
     await verifyModel.findOneAndDelete({ contentId });
     if (!content) {
       throw new ApiError(httpStatus.NOT_FOUND, "Content not found");

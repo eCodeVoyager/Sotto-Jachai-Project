@@ -1,8 +1,3 @@
-Here's the updated version of the **Sotto-Jachai Project** overview with the requested changes:
-
----
-
-<img src="./logo.svg" alt="Sotto-Jachai logo" width="250" />
 
 # 📊 **Sotto-Jachai Project Overview**
 

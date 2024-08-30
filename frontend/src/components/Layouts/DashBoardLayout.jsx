@@ -14,14 +14,14 @@ const DashBoardLayout = () => {
   const { isLoading, isAuthenticated, user } = useSelector(
     (state) => state.auth
   );
-  // useEffect(() => {
-  //   if (Cookie.get("token")) {
-  //     dispatch(fetchLogInUser());
-  //   } else {
-  //     navigate(routes.login, { replace: true });
-  //   }
-  // }, [user]);
-  if (!isLoading) {
+  useEffect(() => {
+    if (Cookie.get("token")) {
+      dispatch(fetchLogInUser());
+    } else {
+      navigate(routes.login, { replace: true });
+    }
+  }, [user]);
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
         <Loader2 size="50" />
@@ -29,7 +29,7 @@ const DashBoardLayout = () => {
     );
   }
   return (
-    !isAuthenticated && (
+    isAuthenticated && (
       <>
         <main className="flex flex-col md:flex-row md:pe-4 md:py-5 h-screen ">
           <aside className="md:px-5 flex items-center md:h-full ">

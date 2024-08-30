@@ -26,19 +26,19 @@ const App = () => {
            protected routes
           ============== */}
 
-          {/* <Route element={<RequireAuth />}> */}
-          {/* dashboard routes start */}
-          <Route element={<DashBoardLayout />}>
-            <Route path={routes.dashboard} element={<Dashboard />} />
-            <Route
-              path={routes.contentSubmission}
-              element={<ContentSubmission />}
-            />
-            <Route path={routes.myContent} element={<MyContents />} />
+          <Route element={<RequireAuth />}>
+            {/* dashboard routes start */}
+            <Route element={<DashBoardLayout />}>
+              <Route path={routes.dashboard} element={<Dashboard />} />
+              <Route
+                path={routes.contentSubmission}
+                element={<ContentSubmission />}
+              />
+              <Route path={routes.myContent} element={<MyContents />} />
+            </Route>
+            {/* dashboard routes end */}
           </Route>
-          {/* dashboard routes end */}
         </Route>
-        {/* </Route> */}
       </Routes>
     </>
   );

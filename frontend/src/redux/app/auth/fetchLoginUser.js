@@ -7,6 +7,7 @@ export const fetchLogInUser = createAsyncThunk(
   async (arg, { rejectWithValue }) => {
     try {
       const { data } = await AuthService.me();
+      Cookie.set("role", data.role);
       return data;
     } catch (error) {
       console.log("Error while fetching user data.");

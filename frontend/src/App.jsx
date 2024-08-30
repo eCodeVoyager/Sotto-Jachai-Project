@@ -9,6 +9,8 @@ import DashBoardLayout from "./components/Layouts/DashBoardLayout";
 import ContentSubmission from "./pages/ContentSubmission";
 import MyContents from "./pages/MyContents";
 import AdminLogin from "./pages/AdminLogin";
+import AdminRequire from "./components/Auth/AdminRequire";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
 
 const App = () => {
   return (
@@ -26,19 +28,26 @@ const App = () => {
            protected routes
           ============== */}
 
-          <Route element={<RequireAuth />}>
-            {/* dashboard routes start */}
-            <Route element={<DashBoardLayout />}>
-              <Route path={routes.dashboard} element={<Dashboard />} />
+          {/* <Route element={<RequireAuth />}> */}
+          {/* dashboard routes start */}
+          <Route element={<DashBoardLayout />}>
+            <Route path={routes.dashboard} element={<Dashboard />} />
+            <Route
+              path={routes.contentSubmission}
+              element={<ContentSubmission />}
+            />
+            <Route path={routes.myContent} element={<MyContents />} />
+            {/* admin require routes */}
+            <Route element={<AdminRequire />}>
               <Route
-                path={routes.contentSubmission}
-                element={<ContentSubmission />}
+                path={routes.adminDashboard}
+                element={<AdminDashboard />}
               />
-              <Route path={routes.myContent} element={<MyContents />} />
             </Route>
-            {/* dashboard routes end */}
           </Route>
+          {/* dashboard routes end */}
         </Route>
+        {/* </Route> */}
       </Routes>
     </>
   );

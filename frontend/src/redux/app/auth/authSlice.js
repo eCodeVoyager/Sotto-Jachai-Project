@@ -3,7 +3,12 @@ import { fetchLogInUser } from "./fetchLoginUser";
 
 const initialState = {
   isAuthenticated: false,
-  user: null,
+  user: {
+    id: "asdf",
+    name: "Farshi",
+    email: "devwithfarshi@gmail.com",
+    role: "admin",
+  },
   isLoading: true,
 };
 

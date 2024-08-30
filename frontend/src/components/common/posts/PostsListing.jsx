@@ -7,7 +7,7 @@ const PostsListing = ({ fromPage, Icon, title, limit = 2 }) => {
   return (
     <section
       className={`${
-        fromPage === routes.dashboard ? "md:mt-32 mt-12" : "mt-8 px-4 md:px-0"
+        fromPage === routes.dashboard ? " mt-12" : "mt-8 px-4 md:px-0"
       }`}
     >
       <div className="flex items-center gap-2">
@@ -19,6 +19,7 @@ const PostsListing = ({ fromPage, Icon, title, limit = 2 }) => {
         </h3>
       </div>
       {fromPage === routes.dashboard ? (
+        // TODO: after adding redux, we will replace the below code with the actual posts
         <ul className="flex flex-col gap-8 mt-11">
           {[...Array(limit)].map((_, idx) => (
             <PostCard key={idx} post={demoPost} />

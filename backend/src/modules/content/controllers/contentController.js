@@ -210,12 +210,28 @@ const getContentByLoggedInUser = async (req, res, next) => {
 
 const deleteContent = async (req, res, next) => {
   try {
-    await contentService.deleteContent(req.params.id);
-    return res
-      .status(httpStatus.OK)
-      .json(
-        new ApiResponse(httpStatus.OK, null, "Content deleted successfully")
-      );
+    const content = await contentService.getContent(req.params.id);
+    if (
+      req.user.role === "admin" ||
+      content.submittedBy.toString() === req.user.id
+    ) {
+      await contentService.deleteContent(req.params.id);
+      return res
+        .status(httpStatus.OK)
+        .json(
+          new ApiResponse(httpStatus.OK, null, "Content deleted successfully")
+        );
+    } else {
+      return res
+        .status(httpStatus.FORBIDDEN)
+        .json(
+          new ApiResponse(
+            httpStatus.FORBIDDEN,
+            null,
+            "Unauthorized to delete content"
+          )
+        );
+    }
   } catch (error) {
     next(error);
   }

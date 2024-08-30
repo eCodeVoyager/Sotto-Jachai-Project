@@ -16,12 +16,6 @@ const { auth, verify, content } = require("./index");
 const app = express();
 
 
-//set trust proxy
-app.set("trust proxy", 1);
-
-// - Configure passport strategies
-require('./config/passport');
-
 //Middlewares
 const allMiddlewares = [
   morgan(process.env.LOGGER_LEVEL === "development" ? "dev" : "combined"),

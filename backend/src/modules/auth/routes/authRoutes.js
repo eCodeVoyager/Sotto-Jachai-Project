@@ -3,20 +3,34 @@
 const router = require("express").Router();
 const authController = require("../controllers/authController");
 const authenticate = require("../../../middlewares/authMiddleware");
+const validate = require("../../../middlewares/validatorMiddleware");
+const authValidation = require("../validations/authValidation");
 
-// Google OAuth routes for authentication
-router.get("/google", authController.googleAuth);
-
-router.get("/google/callback", authController.googleAuthCallback);
-
-router.post("/register", authController.registerUser);
-
-router.post("/login", authController.loginUser);
-
-router.post("/admin/login", authController.loginAdmin);
-
-router.post("/admin/register", authController.registerAdmin);
-
+// Local authentication routes
 router.get("/me", authenticate, authController.loggedInUser);
+
+router.post(
+  "/register",
+  validate(authValidation.RegisterUserValidation),
+  authController.registerUser
+);
+
+router.post(
+  "/login",
+  validate(authValidation.LoginValidation),
+  authController.loginUser
+);
+
+router.post(
+  "/admin/login",
+  validate(authValidation.LoginValidation),
+  authController.loginAdmin
+);
+
+router.post(
+  "/admin/register",
+  validate(authValidation.RegisterAdminValidation),
+  authController.registerAdmin
+);
 
 module.exports = router;

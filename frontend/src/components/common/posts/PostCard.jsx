@@ -12,12 +12,13 @@ import {
   Files,
   Key,
   Loader2,
-  Play,
   Trash,
 } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import PostDetails from "../Modal/PostDetails";
+import ActionsModal from "../Modal/ActionsModal";
 
 const PostCard = ({ fromPage = routes.dashboard, post }) => {
   const [keyShow, setKeyShow] = useState(false);
@@ -67,22 +68,16 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
           {post?.image ? "Photo" : "Text"}
         </h6>
         <h5 className="text-muted-foreground my-2 text-sm">
-          @{post.submittedBy.email.split("@")[0]}
+          @{post.submittedBy?.email.split("@")[0]}
         </h5>
         <h4 className="font-openSans font-bold text-gray-900 text-base">
           {post.title}
         </h4>
 
-        {user?.role !== "admin" && (
+        {fromPage === routes.verification && (
           <p className="mt-2 text-muted-foreground text-sm">{post.text}</p>
         )}
-        <Button
-          variant="ghost"
-          className="mt-3 bg-[#EBEDF0] rounded-2xl text-gray-900 gap-2 "
-        >
-          <span className="font-medium text-sm ">View</span>
-          <Play className="size-4" />
-        </Button>
+        {fromPage !== routes.verification && <PostDetails post={post} />}
         <div className="mt-4">
           {post.status === "verified" ? (
             <>
@@ -114,7 +109,7 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
               <p className="font-semibold  text-sm text-red-400">
                 {user?.role === "admin"
                   ? "Post is not approved yet."
-                  : "Your post is not approved yet."}
+                  : "This post is not approved yet."}
               </p>
             </div>
           )}
@@ -122,46 +117,56 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
         {user?.role === "admin" && (
           <div className="mt-4 flex items-center gap-7 ">
             {post.status === "verified" && (
-              <Button
-                disabled={isLoading}
+              <ActionsModal
+                title={"Are you sure you want to delete this?"}
                 onClick={handleDeletePost}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-red-400 hover:bg-red-400/90"
+                disabled={isLoading}
               >
-                <p className="capitalize text-base font-semibold">Delete</p>
-                {isLoading ? (
-                  <Loader2 className="size-5 animate-spin" />
-                ) : (
-                  <Trash className="size-5" />
-                )}
-              </Button>
-            )}
-            {(post.status === "pending" || post.status === "rejected") && (
-              <>
-                <Button
-                  disabled={isLoading}
-                  onClick={() => handleStatusUpdate("verified")}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-custom-100 hover:bg-custom-100/90"
-                >
-                  <p className="capitalize text-base font-semibold">Verify</p>
+                <Button className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-red-400 hover:bg-red-400/90">
+                  <p className="capitalize text-base font-semibold">Delete</p>
                   {isLoading ? (
                     <Loader2 className="size-5 animate-spin" />
                   ) : (
-                    <CircleCheckBig className="size-5" />
+                    <Trash className="size-5" />
                   )}
                 </Button>
-                {post.status !== "rejected" && (
-                  <Button
-                    disabled={isLoading}
-                    onClick={() => handleStatusUpdate("rejected")}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-red-400 hover:bg-red-400/90"
-                  >
-                    <p className="capitalize text-base font-semibold">Reject</p>
+              </ActionsModal>
+            )}
+            {(post.status === "pending" || post.status === "rejected") && (
+              <>
+                {" "}
+                <ActionsModal
+                  title={"Are you sure you want to verified this?"}
+                  desc="Confirm verification? Once verified, this will be accessible to all users via a key."
+                  disabled={isLoading}
+                  onClick={() => handleStatusUpdate("verified")}
+                >
+                  <Button className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-custom-100 hover:bg-custom-100/90">
+                    <p className="capitalize text-base font-semibold">Verify</p>
                     {isLoading ? (
                       <Loader2 className="size-5 animate-spin" />
                     ) : (
-                      <CircleOff className="size-5" />
+                      <CircleCheckBig className="size-5" />
                     )}
                   </Button>
+                </ActionsModal>
+                {post.status !== "rejected" && (
+                  <ActionsModal
+                    title={"Are you sure you want to reject this?"}
+                    disabled={isLoading}
+                    onClick={() => handleStatusUpdate("rejected")}
+                  >
+                    <Button className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-red-400 hover:bg-red-400/90">
+                      <p className="capitalize text-base font-semibold">
+                        Reject
+                      </p>
+                      {isLoading ? (
+                        <Loader2 className="size-5 animate-spin" />
+                      ) : (
+                        <CircleOff className="size-5" />
+                      )}
+                    </Button>
+                  </ActionsModal>
                 )}
               </>
             )}
@@ -180,7 +185,8 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
           <CircleCheckBig className="size-5" />
         )}
       </div>
-      {post.image.length > 0 && (
+
+      {post.image?.length > 0 && (
         <figure
           className={` w-full ${
             fromPage === routes.dashboard ? "flex-[.3]" : "flex-[.4]"
@@ -189,7 +195,7 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
           <img
             src={post.image}
             alt="post image"
-            className="rounded-xl max-h-[250px] w-full object-contain"
+            className={`rounded-xl max-h-[250px] w-full object-contain`}
           />
         </figure>
       )}

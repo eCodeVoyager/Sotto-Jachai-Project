@@ -42,6 +42,7 @@ const Verification = () => {
                       setSubmitting(false);
                     })
                     .catch((error) => {
+                      setPost(null);
                       console.log(error);
                       values.key = "";
                       toast.error(

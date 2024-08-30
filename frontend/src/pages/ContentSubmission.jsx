@@ -46,15 +46,19 @@ const ContentSubmission = () => {
               setSubmitting(false);
               return;
             }
-            ContentService.create({
-              title: values.title,
-              text: values.caption,
-              image: uploadedFiles,
-            })
+            const formData = new FormData();
+            formData.append("title", values.title);
+            formData.append("text", values.caption);
+            formData.append("content", uploadedFiles);
+            ContentService.create(formData)
               .then(({ data }) => {
                 console.log(data);
                 toast.success("Content created successfully.");
                 setSubmitting(false);
+                values.title = "";
+                values.caption = "";
+                setPreview(null);
+                setUploadedFiles(null);
               })
               .catch((error) => {
                 setSubmitting(false);

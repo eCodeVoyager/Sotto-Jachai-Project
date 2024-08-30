@@ -89,11 +89,11 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
         )}
       </div>
       <figure
-        className={`${
+        className={`h-[250px] flex justify-center ${
           fromPage === routes.dashboard ? "flex-[.3]" : "flex-[.4]"
         }`}
       >
-        <img src={post.image} alt="post image" className="rounded-xl" />
+        <img src={post.image} alt="post image" className="rounded-xl h-full" />
       </figure>
     </li>
   );

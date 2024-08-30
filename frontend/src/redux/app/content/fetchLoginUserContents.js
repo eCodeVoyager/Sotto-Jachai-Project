@@ -7,8 +7,8 @@ export const fetchLoginUserContents = createAsyncThunk(
       const { data } = await ContentService.getMyContent();
       return data;
     } catch (error) {
-      console.log("Error while fetching user contents.");
-      console.log(error);
+      // console.log("Error while fetching user contents.");
+      // console.log(error);
       return rejectWithValue(error);
     }
   }

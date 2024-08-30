@@ -13,8 +13,10 @@ import AdminRequire from "./components/Auth/AdminRequire";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminAllContents from "./pages/Admin/AdminAllContents";
 import AdminRegister from "./pages/AdminRegister";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <>
       <Routes>
@@ -34,7 +36,13 @@ const App = () => {
           <Route element={<RequireAuth />}>
             {/* dashboard routes start */}
             <Route element={<DashBoardLayout />}>
-              <Route path={routes.dashboard} element={<Dashboard />} />
+              {user?.role === "admin" ? (
+                <Route element={<AdminRequire />}>
+                  <Route path={routes.dashboard} element={<AdminDashboard />} />
+                </Route>
+              ) : (
+                <Route path={routes.dashboard} element={<Dashboard />} />
+              )}
               <Route
                 path={routes.contentSubmission}
                 element={<ContentSubmission />}
@@ -42,10 +50,6 @@ const App = () => {
               <Route path={routes.myContent} element={<MyContents />} />
               {/* admin require routes */}
               <Route element={<AdminRequire />}>
-                <Route
-                  path={routes.adminDashboard}
-                  element={<AdminDashboard />}
-                />
                 <Route
                   path={routes.adminAllContent}
                   element={<AdminAllContents />}

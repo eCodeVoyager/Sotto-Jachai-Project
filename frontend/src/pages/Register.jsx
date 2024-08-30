@@ -43,7 +43,6 @@ const Register = () => {
         onSubmit={(values, { setSubmitting }) => {
           AuthService.register(values)
             .then(({ data }) => {
-              console.log(data);
               Cookie.set("token", data.token);
               toast.success("Registration successful.");
               setSubmitting(false);
@@ -147,15 +146,17 @@ const Register = () => {
             >
               {isSubmitting ? <Loader2 className="animate-spin" /> : "sign up"}
             </Button>
-            <Typography color="gray" className="mt-4 text-center font-normal">
-              Already have an account?{" "}
-              <Link
-                to={routes.login}
-                className=" text-custom-100 underline font-semibold"
-              >
-                Sign In
-              </Link>
-            </Typography>
+            <div>
+              <Typography color="gray" className="mt-4 text-center font-normal">
+                Already have an account?{" "}
+                <Link
+                  to={routes.login}
+                  className=" text-custom-100 underline font-semibold"
+                >
+                  Sign In
+                </Link>
+              </Typography>
+            </div>
           </form>
         )}
       </Formik>

@@ -8,4 +8,9 @@ export const store = configureStore({
     content: contentReducer,
     adminContent: adminContentReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+  devTools: true,
 });

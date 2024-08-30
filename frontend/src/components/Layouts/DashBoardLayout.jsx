@@ -16,6 +16,7 @@ const DashBoardLayout = () => {
   const { user, isLoading, isAuthenticated } = useSelector(
     (state) => state.auth
   );
+
   useEffect(() => {
     if (Cookie.get("token")) {
       dispatch(fetchLogInUser());
@@ -29,7 +30,6 @@ const DashBoardLayout = () => {
         dispatch(fetchLoginUserContents());
       } else if (user.role === "admin") {
         dispatch(fetchUsersContents());
-        navigate(routes.adminDashboard);
       }
     }
   }, [user]);

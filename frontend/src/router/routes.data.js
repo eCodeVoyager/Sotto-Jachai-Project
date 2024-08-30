@@ -1,20 +1,18 @@
 import { DashboardIcon, MyContentsIcon } from "@/components/common/Icons";
 
 export const routes = {
-  dashboard: "/",
-  contentSubmission: "/mycontent/content-submission",
+  verification: "/",
+  dashboard: "/dashboard",
+  contentSubmission: "/content-submission",
   myContent: "/mycontent",
   login: "/login",
   register: "/register",
   adminLogin: "/admin/login",
   adminRegister: "/admin/register",
-  verification: "/verification",
   adminAllContent: "/admin/allcontent",
-  adminDashboard: "/admin/dashboard",
 };
 
 // dashboard navigation
-
 export const userNavigation = [
   {
     id: "1",
@@ -28,18 +26,30 @@ export const userNavigation = [
     href: routes.myContent,
     icon: MyContentsIcon,
   },
+  {
+    id: "6",
+    title: "Create new content",
+    href: routes.contentSubmission,
+    icon: MyContentsIcon,
+  },
 ];
 export const adminNavigation = [
   {
     id: "1",
     title: "Dashboard",
-    href: routes.adminDashboard,
+    href: routes.dashboard,
     icon: DashboardIcon,
   },
   {
     id: "4",
     title: "All Contents",
     href: routes.adminAllContent,
+    icon: MyContentsIcon,
+  },
+  {
+    id: "8",
+    title: "Create new content",
+    href: routes.contentSubmission,
     icon: MyContentsIcon,
   },
 ];

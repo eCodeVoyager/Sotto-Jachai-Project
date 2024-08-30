@@ -43,7 +43,6 @@ const AdminRegister = () => {
         onSubmit={(values, { setSubmitting }) => {
           AdminService.register(values)
             .then(({ data }) => {
-              console.log(data);
               Cookie.set("token", data.token);
               toast.success("Admin Registration successful.");
               setSubmitting(false);

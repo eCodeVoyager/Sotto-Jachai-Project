@@ -17,24 +17,33 @@ const PostsListing = ({ fromPage, Icon, title, contents, limit = 3 }) => {
           {title}
         </h3>
       </div>
-      {fromPage === routes.dashboard ? (
-        // TODO: after adding redux, we will replace the below code with the actual posts
-        <ul className="flex flex-col gap-8 mt-11">
-          {contents
-            ?.slice()
-            .reverse()
-            .slice(0, limit)
-            .map((post) => (
-              <PostCard key={post._id} post={post} />
-            ))}
-        </ul>
+      {contents.length > 0 ? (
+        fromPage === routes.dashboard ? (
+          <ul className="flex flex-col gap-8 mt-11">
+            {contents
+              ?.slice()
+              .reverse()
+              .slice(0, limit)
+              .map((post) => (
+                <PostCard key={post._id} post={post} />
+              ))}
+          </ul>
+        ) : (
+          <>
+            <div className="mt-9 pb-5 md:pb-0">
+              <PostsPaginate
+                contents={contents?.slice().reverse()}
+                itemsPerPage={limit}
+              />
+            </div>
+          </>
+        )
       ) : (
         <>
-          <div className="mt-9 pb-5 md:pb-0">
-            <PostsPaginate
-              contents={contents?.slice().reverse()}
-              itemsPerPage={limit}
-            />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <h3 className="text-xl lg:text-4xl font-semibold text-text whitespace-nowrap">
+              No posts to show 🙂
+            </h3>
           </div>
         </>
       )}

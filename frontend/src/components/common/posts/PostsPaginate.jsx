@@ -5,10 +5,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function Items({ currentItems }) {
   return (
-    <>
-      {currentItems &&
-        currentItems.map((post) => <PostCard post={post} key={post.caption} />)}
-    </>
+    currentItems &&
+    currentItems.map((post) => <PostCard post={post} key={post._id} />)
   );
 }
 const PostsPaginate = ({ contents, itemsPerPage }) => {

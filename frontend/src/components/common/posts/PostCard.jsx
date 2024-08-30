@@ -1,4 +1,8 @@
 import { Button } from "@/components/ui/button";
+import {
+  contentDelete,
+  contentStatusUpdate,
+} from "@/redux/app/admin/adminContentSlice";
 import { routes } from "@/router/routes.data";
 import AdminService from "@/services/AdminService";
 import {
@@ -7,36 +11,47 @@ import {
   Clock,
   Files,
   Key,
+  Loader2,
   Play,
   Trash,
 } from "lucide-react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
 const PostCard = ({ fromPage = routes.dashboard, post }) => {
   const [keyShow, setKeyShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const handleCopy = () => {
-    navigator.clipboard.writeText(post.keyId.key);
+    navigator.clipboard.writeText(post?.keyId.key);
     toast.success("Key copied to clipboard.");
   };
   const handleStatusUpdate = (status) => {
+    setIsLoading(true);
     AdminService.statusUpdate(post._id, status)
       .then((res) => {
+        dispatch(contentStatusUpdate({ postId: post._id, status }));
         toast.success(res.message);
+        setIsLoading(false);
       })
       .catch((e) => {
+        setIsLoading(false);
         console.log(e);
         toast.error("Failed to update status.");
       });
   };
   const handleDeletePost = () => {
+    setIsLoading(true);
     AdminService.deleteContent(post._id)
       .then((res) => {
+        dispatch(contentDelete({ postId: post._id }));
         toast.success(res.message);
+        setIsLoading(false);
       })
       .catch((e) => {
+        setIsLoading(false);
         console.log(e);
         toast.error("Failed to delete post.");
       });
@@ -58,7 +73,7 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
           {post.title}
         </h4>
 
-        {user.role !== "admin" && (
+        {user?.role !== "admin" && (
           <p className="mt-2 text-muted-foreground text-sm">{post.text}</p>
         )}
         <Button
@@ -83,7 +98,7 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
                     type="text"
                     readOnly
                     className="bg-custom-50 text-sm rounded-lg px-2 tracking-wider h-full w-full text-text outline-none"
-                    value={keyShow ? post.keyId.key : "****************"}
+                    value={keyShow ? post.keyId?.key : "****************"}
                   />
                   <button
                     onClick={handleCopy}
@@ -97,40 +112,55 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
           ) : (
             <div>
               <p className="font-semibold  text-sm text-red-400">
-                {user.role === "admin"
+                {user?.role === "admin"
                   ? "Post is not approved yet."
                   : "Your post is not approved yet."}
               </p>
             </div>
           )}
         </div>
-        {user.role === "admin" && (
+        {user?.role === "admin" && (
           <div className="mt-4 flex items-center gap-7 ">
             {post.status === "verified" && (
               <Button
+                disabled={isLoading}
                 onClick={handleDeletePost}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-red-400 hover:bg-red-400/90"
               >
                 <p className="capitalize text-base font-semibold">Delete</p>
-                <Trash className="size-5" />
+                {isLoading ? (
+                  <Loader2 className="size-5 animate-spin" />
+                ) : (
+                  <Trash className="size-5" />
+                )}
               </Button>
             )}
             {(post.status === "pending" || post.status === "rejected") && (
               <>
                 <Button
+                  disabled={isLoading}
                   onClick={() => handleStatusUpdate("verified")}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-custom-100 hover:bg-custom-100/90"
                 >
                   <p className="capitalize text-base font-semibold">Verify</p>
-                  <CircleCheckBig className="size-5" />
+                  {isLoading ? (
+                    <Loader2 className="size-5 animate-spin" />
+                  ) : (
+                    <CircleCheckBig className="size-5" />
+                  )}
                 </Button>
                 {post.status !== "rejected" && (
                   <Button
+                    disabled={isLoading}
                     onClick={() => handleStatusUpdate("rejected")}
                     className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-red-400 hover:bg-red-400/90"
                   >
                     <p className="capitalize text-base font-semibold">Reject</p>
-                    <CircleOff className="size-5" />
+                    {isLoading ? (
+                      <Loader2 className="size-5 animate-spin" />
+                    ) : (
+                      <CircleOff className="size-5" />
+                    )}
                   </Button>
                 )}
               </>
@@ -150,17 +180,19 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
           <CircleCheckBig className="size-5" />
         )}
       </div>
-      <figure
-        className={` w-full ${
-          fromPage === routes.dashboard ? "flex-[.3]" : "flex-[.4]"
-        }`}
-      >
-        <img
-          src={post.image}
-          alt="post image"
-          className="rounded-xl max-h-[250px] w-full object-contain"
-        />
-      </figure>
+      {post.image.length > 0 && (
+        <figure
+          className={` w-full ${
+            fromPage === routes.dashboard ? "flex-[.3]" : "flex-[.4]"
+          }`}
+        >
+          <img
+            src={post.image}
+            alt="post image"
+            className="rounded-xl max-h-[250px] w-full object-contain"
+          />
+        </figure>
+      )}
     </li>
   );
 };

@@ -19,7 +19,7 @@ const PostsListing = ({ fromPage, Icon, title, contents, limit = 3 }) => {
       </div>
       {contents.length > 0 ? (
         fromPage === routes.dashboard ? (
-          <ul className="flex flex-col gap-8 mt-11">
+          <ul className="flex flex-col mt-11">
             {contents
               ?.slice()
               .reverse()

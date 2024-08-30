@@ -10,6 +10,9 @@ export const adminContentSlice = createSlice({
   name: "adminContent",
   initialState,
   reducers: {
+    createAdminContent: (state, action) => {
+      state.allContents.push(action.payload);
+    },
     contentStatusUpdate: (state, { payload }) => {
       const { postId, status } = payload;
       const index = state.allContents.findIndex(
@@ -40,5 +43,6 @@ export const adminContentSlice = createSlice({
   },
 });
 
-export const { contentStatusUpdate, contentDelete } = adminContentSlice.actions;
+export const { contentStatusUpdate, contentDelete, createAdminContent } =
+  adminContentSlice.actions;
 export default adminContentSlice.reducer;

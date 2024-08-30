@@ -1,19 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { createAdminContent } from "@/redux/app/admin/adminContentSlice";
 import { createContent } from "@/redux/app/content/contentSlice";
 import ContentService from "@/services/ContentService";
 import { Formik } from "formik";
 import { CloudUpload, Loader2, PenLine, Share2 } from "lucide-react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
 const ContentSubmission = () => {
   const dispatch = useDispatch();
   const [uploadedFiles, setUploadedFiles] = useState(null);
   const [preview, setPreview] = useState(null);
+  const { user } = useSelector((state) => state.auth);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -56,7 +58,11 @@ const ContentSubmission = () => {
             ContentService.create(formData)
               .then(({ data }) => {
                 console.log(data.content);
-                dispatch(createContent(data.content));
+                if (user.role === "admin") {
+                  dispatch(createAdminContent(data.content));
+                } else {
+                  dispatch(createContent(data.content));
+                }
                 toast.success("Content created successfully.");
                 setSubmitting(false);
                 values.title = "";

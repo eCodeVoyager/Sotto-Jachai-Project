@@ -58,7 +58,7 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
       });
   };
   return (
-    <li className="flex justify-between flex-col-reverse gap-y-5 gap-x-2 md:flex-row md:items-center pb-3 border-b border-b-custom-50 mb-3">
+    <li className="flex justify-between flex-col-reverse gap-y-5 gap-x-2 md:flex-row md:items-center pb-4 border-b border-b-custom-50 mb-4">
       <div
         className={`${
           fromPage === routes.dashboard ? "flex-[.7]" : "flex-[.6]"

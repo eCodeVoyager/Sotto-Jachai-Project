@@ -117,6 +117,17 @@ const loginAdmin = async (req, res, next) => {
     return next(error);
   }
 };
+
+const loggedInUser = async (req, res, next) => {
+  try {
+    const user = await userService.getUserById(req.user.id);
+    return res.json(
+      new ApiResponse(httpStatus.OK, user, "Logged in user details retrieved")
+    );
+  } catch (error) {
+    return next(error);
+  }
+};
 module.exports = {
   googleAuth,
   googleAuthCallback,
@@ -124,4 +135,5 @@ module.exports = {
   loginUser,
   registerAdmin,
   loginAdmin,
+  loggedInUser,
 };

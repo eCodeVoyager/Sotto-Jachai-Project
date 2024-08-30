@@ -1,7 +1,6 @@
-const httpStatus = require('http-status');
-const userModel = require('../models/userModel');
-const ApiError = require('../../../utils/apiError');
-
+const httpStatus = require("http-status");
+const userModel = require("../models/userModel");
+const ApiError = require("../../../utils/apiError");
 
 /**
  * Creates a new user.
@@ -12,12 +11,12 @@ const ApiError = require('../../../utils/apiError');
  * @returns {Promise<Object>} A promise that resolves to the newly created user.
  * @throws {ApiError} If the email or phone is already taken.
  */
-const createUser = async userBody => {
+const createUser = async (userBody) => {
   try {
     const existingUser = await userModel.findOne({ email: userBody.email });
 
     if (existingUser) {
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+      throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
     }
 
     return await userModel.create(userBody);
@@ -33,7 +32,7 @@ const createUser = async userBody => {
  */
 const getAllUsers = async () => {
   try {
-    return await userModel.find();
+    return await userModel.find().select("-password -__v");
   } catch (error) {
     throw error;
   }
@@ -49,7 +48,7 @@ const getAllUsers = async () => {
  * @param {string} [body.googleId] - The user's Google ID.
  * @returns {Promise<Object>} A promise that resolves to the user if found.
  */
-const getUnprotectedUser = async body => {
+const getUnprotectedUser = async (body) => {
   try {
     const { id, email, phone, googleId } = body;
     const query = {};
@@ -70,9 +69,9 @@ const getUnprotectedUser = async body => {
  * @param {string} id - The ID of the user.
  * @returns {Promise<Object>} A promise that resolves to the user if found.
  */
-const getUserById = async id => {
+const getUserById = async (id) => {
   try {
-    return await userModel.findById(id);
+    return await userModel.findById(id).select("-password -__v");
   } catch (error) {
     throw error;
   }
@@ -84,15 +83,13 @@ const getUserById = async id => {
  * @param {string} email - The email of the user.
  * @returns {Promise<Object>} A promise that resolves to the user if found.
  */
-const getUserByEmail = async email => {
+const getUserByEmail = async (email) => {
   try {
-    return await userModel.findOne({ email });
+    return await userModel.findOne({ email }).select("-password -__v");
   } catch (error) {
     throw error;
   }
 };
-
-
 
 /**
  * Updates a user by their ID.
@@ -115,7 +112,7 @@ const updateUserById = async (userId, updateBody) => {
  * @param {string} userId - The ID of the user.
  * @returns {Promise<Object>} A promise that resolves to the deleted user.
  */
-const deleteUserById = async userId => {
+const deleteUserById = async (userId) => {
   try {
     return await userModel.findByIdAndDelete(userId);
   } catch (error) {
@@ -130,5 +127,5 @@ module.exports = {
   getUserByEmail,
   createUser,
   updateUserById,
-  deleteUserById
+  deleteUserById,
 };

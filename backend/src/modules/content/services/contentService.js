@@ -2,7 +2,7 @@ const Content = require("../models/contentModel");
 const { generateKey } = require("../../../utils/hashUtils");
 const ApiError = require("../../../utils/apiError");
 const httpStatus = require("http-status");
-const Key = require("../../verify/models/verifyModel");
+const verifyModel = require("../../verify/models/verifyModel");
 
 /**
  * Submits content.
@@ -12,8 +12,6 @@ const Key = require("../../verify/models/verifyModel");
  */
 const submitContent = async (contentBody, userId) => {
   try {
-    const key = generateKey();
-
     const content = new Content({
       ...contentBody,
       status: "pending",
@@ -21,12 +19,9 @@ const submitContent = async (contentBody, userId) => {
     });
     await content.save();
 
-    const keyRecord = new Key({ key, contentId: content._id });
-    await keyRecord.save();
-
-    return { content, key };
+    return { content };
   } catch (error) {
-    throw new ApiError(httpStatus.BAD_REQUEST, error.message);
+    throw error;
   }
 };
 
@@ -40,37 +35,80 @@ const verifyContent = async (contentId, status) => {
   try {
     const content = await Content.findById(contentId);
     if (!content) {
-      throw new ApiError(httpStatus.NOT_FOUND, "Content not found");
+      throw error;
     }
 
     content.status = status;
+
+    if (status === "verified") {
+      const key = generateKey();
+      const keyRecord = new verifyModel({
+        key,
+        contentId,
+      });
+      await keyRecord.save();
+
+      content.keyId = keyRecord._id;
+    }
+
     await content.save();
 
     return content;
   } catch (error) {
-    throw new ApiError(httpStatus.BAD_REQUEST, error.message);
+    throw error;
   }
 };
 
 const getContents = async (filter) => {
   try {
-    const contents = await Content.find(filter);
-    return contents;
+    return await Content.find(filter).populate([
+      {
+        path: "submittedBy",
+        select: "role email _id",
+      },
+      {
+        path: "keyId",
+        select: "key",
+      },
+    ]);
   } catch (error) {
-    throw new ApiError(httpStatus.BAD_REQUEST, error.message);
+    throw error;
+  }
+};
+
+const getContent = async (contentId) => {
+  try {
+    return await Content.findById(contentId).populate([
+      {
+        path: "submittedBy",
+        select: "role email _id",
+      },
+      {
+        path: "keyId",
+        select: "key",
+      },
+    ]);
+  } catch (error) {
+    throw error;
   }
 };
 
 const deleteContent = async (contentId) => {
   try {
-    const content = await Content.findById(contentId);
+    const content = await Content.findByIdAndDelete(contentId);
     if (!content) {
       throw new ApiError(httpStatus.NOT_FOUND, "Content not found");
     }
-
-    await content.remove();
   } catch (error) {
-    throw new ApiError(httpStatus.BAD_REQUEST, error.message);
+    throw error;
+  }
+};
+
+const getKeybyContentId = async (contentId) => {
+  try {
+    return await verifyModel.findOne({ content: contentId });
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -78,5 +116,7 @@ module.exports = {
   submitContent,
   verifyContent,
   getContents,
+  getContent,
   deleteContent,
+  getKeybyContentId,
 };

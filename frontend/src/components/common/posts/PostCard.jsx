@@ -67,7 +67,11 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
         <h6 className="text-muted-foreground text-sm">
           {post?.image ? "Photo" : "Text"}
         </h6>
-        <h5 className="text-muted-foreground my-2 text-sm">
+        <h5
+          className={` text-muted-foreground my-2 text-sm ${
+            post.image.length > 0 ? "hidden md:block" : ""
+          }`}
+        >
           @{post.submittedBy?.email.split("@")[0]}
         </h5>
         <h4 className="font-openSans font-bold text-gray-900 text-base">
@@ -192,6 +196,9 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
             fromPage === routes.dashboard ? "flex-[.3]" : "flex-[.4]"
           }`}
         >
+          <h5 className="md:hidden text-muted-foreground my-2 text-sm">
+            @{post.submittedBy?.email.split("@")[0]}
+          </h5>
           <img
             src={post.image}
             alt="post image"

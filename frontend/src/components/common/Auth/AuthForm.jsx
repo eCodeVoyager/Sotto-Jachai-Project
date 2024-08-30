@@ -3,8 +3,8 @@ import { Card, Typography } from "@material-tailwind/react";
 const AuthForm = ({ title, subtitle, children }) => {
   return (
     <>
-      <section className="flex justify-center md:justify-between min-h-screen px-4 md:px-0">
-        <div className="flex items-center justify-center flex-col gap-4 md:flex-[.4] h-screen md:h-auto relative">
+      <section className="flex justify-center md:justify-between md:min-h-dvh px-4 md:px-0 ">
+        <div className="flex items-center justify-center flex-col  gap-4 md:flex-[.4] h-dvh md:h-auto relative w-full">
           <figure>
             <img
               className="w-[180px] md:w-[200px]"

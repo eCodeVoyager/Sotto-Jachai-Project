@@ -34,8 +34,12 @@ const PostDetails = ({ post }) => {
             <div>{post.text}</div>
           </DialogDescription>
           {post?.image?.length > 0 && (
-            <figure>
-              <img src={post?.image[0]} alt={post.title} />
+            <figure className={` w-full`}>
+              <img
+                src={post.image[0]}
+                alt="post image"
+                className={`rounded-xl max-h-[250px] w-full object-contain`}
+              />
             </figure>
           )}
         </DialogContent>

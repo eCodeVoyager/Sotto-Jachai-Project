@@ -38,7 +38,6 @@ const Login = () => {
         onSubmit={(values, { setSubmitting }) => {
           AuthService.login(values)
             .then(({ data }) => {
-              console.log(data);
               Cookie.set("token", data.token);
               toast.success("Login successful.");
               setSubmitting(false);

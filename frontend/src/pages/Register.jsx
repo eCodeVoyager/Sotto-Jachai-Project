@@ -43,7 +43,6 @@ const Register = () => {
         onSubmit={(values, { setSubmitting }) => {
           AuthService.register(values)
             .then(({ data }) => {
-              console.log(data);
               Cookie.set("token", data.token);
               toast.success("Registration successful.");
               setSubmitting(false);

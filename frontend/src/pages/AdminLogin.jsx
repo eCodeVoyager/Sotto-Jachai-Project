@@ -36,7 +36,6 @@ const AdminLogin = () => {
         onSubmit={(values, { setSubmitting }) => {
           AdminService.login(values)
             .then(({ data }) => {
-              console.log(data);
               Cookie.set("token", data.token);
               toast.success("Admin Login successful.");
               navigate(routes.dashboard);

@@ -2,6 +2,7 @@ import Container from "@/components/common/Container";
 import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/router/routes.data";
 import { Link } from "react-router-dom";
+import Cookie from "js-cookie";
 
 const navData = [
   {
@@ -41,14 +42,25 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <Link
-            to={routes.register}
-            className={buttonVariants({
-              variant: "ghost",
-            })}
-          >
-            Register
-          </Link>
+          {!Cookie.get("token") ? (
+            <Link
+              to={routes.register}
+              className={buttonVariants({
+                variant: "ghost",
+              })}
+            >
+              Register
+            </Link>
+          ) : (
+            <Link
+              to={routes.dashboard}
+              className={buttonVariants({
+                variant: "ghost",
+              })}
+            >
+              Dashboard
+            </Link>
+          )}
         </div>
       </Container>
     </nav>

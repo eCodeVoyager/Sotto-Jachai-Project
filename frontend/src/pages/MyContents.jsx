@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 const MyContents = () => {
   const { contents, isLoading } = useSelector((state) => state.content);
+
   if (isLoading) {
     return (
       <div className="h-full flex items-center justify-center">
@@ -12,6 +13,7 @@ const MyContents = () => {
       </div>
     );
   }
+
   return (
     <PostsListing
       title={"My Content"}

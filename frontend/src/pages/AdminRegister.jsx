@@ -49,7 +49,7 @@ const AdminRegister = () => {
               Cookie.set("token", data.token);
               toast.success("Admin Registration successful.");
               setSubmitting(false);
-              navigate(routes.adminDashboard);
+              navigate(routes.dashboard);
             })
             .catch((error) => {
               console.log("Error while Admin registering.");

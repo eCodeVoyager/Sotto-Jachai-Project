@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-// const BASE_URL = "http://localhost:3000/api/v1";
 import axios from "axios";
 const BASE_URL = "https://sotto-jachai.azurewebsites.net/api/v1";
 const instance = axios.create({

@@ -8,7 +8,6 @@ import Verification from "./pages/Verification";
 import DashBoardLayout from "./components/Layouts/DashBoardLayout";
 import ContentSubmission from "./pages/ContentSubmission";
 import MyContents from "./pages/MyContents";
-import MyProfile from "./pages/MyProfile";
 import AdminLogin from "./pages/AdminLogin";
 
 const App = () => {
@@ -27,19 +26,18 @@ const App = () => {
            protected routes
           ============== */}
 
-          {/* <Route element={<RequireAuth />}> */}
-          {/* dashboard routes start */}
-          <Route element={<DashBoardLayout />}>
-            <Route path={routes.dashboard} element={<Dashboard />} />
-            <Route
-              path={routes.contentSubmission}
-              element={<ContentSubmission />}
-            />
-            <Route path={routes.myContent} element={<MyContents />} />
-            <Route path={routes.myProfile} element={<MyProfile />} />
+          <Route element={<RequireAuth />}>
+            {/* dashboard routes start */}
+            <Route element={<DashBoardLayout />}>
+              <Route path={routes.dashboard} element={<Dashboard />} />
+              <Route
+                path={routes.contentSubmission}
+                element={<ContentSubmission />}
+              />
+              <Route path={routes.myContent} element={<MyContents />} />
+            </Route>
+            {/* dashboard routes end */}
           </Route>
-          {/* dashboard routes end */}
-          {/* </Route> */}
         </Route>
       </Routes>
     </>

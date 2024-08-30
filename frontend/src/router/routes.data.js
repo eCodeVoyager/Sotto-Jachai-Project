@@ -2,9 +2,8 @@ import { DashboardIcon, MyContentsIcon } from "@/components/common/Icons";
 
 export const routes = {
   dashboard: "/",
-  contentSubmission: "/content-submission",
+  contentSubmission: "/mycontent/content-submission",
   myContent: "/mycontent",
-  myProfile: "/myprofile",
   login: "/login",
   register: "/register",
   adminLogin: "/admin-login",

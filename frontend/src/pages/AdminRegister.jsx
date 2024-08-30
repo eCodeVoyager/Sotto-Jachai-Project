@@ -18,7 +18,7 @@ const AdminRegister = () => {
       subtitle={"Nice to meet you! Enter your details to register as a Admin"}
     >
       <Formik
-        initialValues={{ name: "", email: "", password: "" }}
+        initialValues={{ name: "", email: "", password: "", adminSecret: "" }}
         validate={(values) => {
           const errors = {};
           if (!values.email) {
@@ -37,6 +37,9 @@ const AdminRegister = () => {
             errors.name = "Name is required!";
           } else if (values.name.length < 3) {
             errors.name = "Name must be at least 3 characters";
+          }
+          if (!values.adminSecret) {
+            errors.adminSecret = "Admin Secret is required!";
           }
           return errors;
         }}
@@ -121,6 +124,25 @@ const AdminRegister = () => {
                 />
                 <p className="mt-1 text-red-500 text-sm">
                   {errors.password && touched.password && errors.password}
+                </p>
+              </div>
+              <Typography variant="h6" color="blue-gray" className="-mb-3">
+                Admin Secret Key
+              </Typography>
+              <div>
+                <Input
+                  type="password"
+                  name="adminSecret"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.adminSecret}
+                  size="lg"
+                  placeholder="********"
+                />
+                <p className="mt-1 text-red-500 text-sm">
+                  {errors.adminSecret &&
+                    touched.adminSecret &&
+                    errors.adminSecret}
                 </p>
               </div>
             </div>

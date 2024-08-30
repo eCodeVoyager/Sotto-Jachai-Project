@@ -6,7 +6,7 @@ const PostsListing = ({ fromPage, Icon, title, contents, limit = 3 }) => {
   return (
     <section
       className={`${
-        fromPage === routes.dashboard ? " mt-12" : "mt-8 px-4 md:px-0"
+        fromPage === routes.dashboard ? " mt-10" : "mt-8 px-4 md:px-0"
       }`}
     >
       <div className="flex items-center gap-2">

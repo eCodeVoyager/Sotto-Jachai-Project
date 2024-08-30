@@ -37,6 +37,12 @@ const Sidebar = () => {
             />
           </Link>
         </figure>
+        {userInfo.role === "admin" && (
+          <h6 className="text-center capitalize text-sm mt-4 text-custom ">
+            You are on <span className="font-semibold underline">admin</span>{" "}
+            account
+          </h6>
+        )}
         {/* navigation */}
         <div className="flex-1 md:flex items-center w-full hidden">
           <ul className="w-full px-2 space-y-3">

@@ -1,4 +1,5 @@
 import Container from "@/components/common/Container";
+import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/router/routes.data";
 import { Link } from "react-router-dom";
 
@@ -11,12 +12,12 @@ const navData = [
   {
     id: 2,
     title: "About",
-    href: "/about",
+    href: "#",
   },
   {
     id: 4,
     title: "Contact",
-    href: "/contact",
+    href: "#",
   },
 ];
 const Navbar = () => {
@@ -25,7 +26,7 @@ const Navbar = () => {
       <Container>
         <div className="flex items-center">
           <figure>
-            <Link to={routes.dashboard}>
+            <Link to={routes.verification}>
               <img
                 className="w-[100px] md:w-auto"
                 src="/images/logo.svg"
@@ -35,9 +36,19 @@ const Navbar = () => {
           </figure>
           <ul className="flex items-center ml-auto md:mx-auto gap-5 md:gap-7 font-medium text-gray-900 text-base">
             {navData.map((item) => (
-              <li key={item.id}>{item.title}</li>
+              <li key={item.id}>
+                <Link to={item.href}>{item.title}</Link>
+              </li>
             ))}
           </ul>
+          <Link
+            to={routes.register}
+            className={buttonVariants({
+              variant: "ghost",
+            })}
+          >
+            Register
+          </Link>
         </div>
       </Container>
     </nav>

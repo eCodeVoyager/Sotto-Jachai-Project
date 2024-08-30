@@ -1,6 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { routes } from "@/router/routes.data";
-import { Files, Key, Play } from "lucide-react";
+import AdminService from "@/services/AdminService";
+import {
+  CircleCheckBig,
+  CircleOff,
+  Clock,
+  Files,
+  Key,
+  Play,
+  Trash,
+} from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
@@ -11,6 +20,26 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(post.keyId.key);
     toast.success("Key copied to clipboard.");
+  };
+  const handleStatusUpdate = (status) => {
+    AdminService.statusUpdate(post._id, status)
+      .then((res) => {
+        toast.success(res.message);
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error("Failed to update status.");
+      });
+  };
+  const handleDeletePost = () => {
+    AdminService.deleteContent(post._id)
+      .then((res) => {
+        toast.success(res.message);
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error("Failed to delete post.");
+      });
   };
   return (
     <li className="flex justify-between flex-col-reverse gap-y-5 gap-x-2 md:flex-row md:items-center pb-3 border-b border-b-custom-50 mb-3">
@@ -28,10 +57,13 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
         <h4 className="font-openSans font-bold text-gray-900 text-base">
           {post.title}
         </h4>
-        <p className="mt-2 text-muted-foreground text-sm">{post.text}</p>
+
+        {user.role !== "admin" && (
+          <p className="mt-2 text-muted-foreground text-sm">{post.text}</p>
+        )}
         <Button
           variant="ghost"
-          className="mt-4 bg-[#EBEDF0] rounded-2xl text-gray-900 gap-2 "
+          className="mt-3 bg-[#EBEDF0] rounded-2xl text-gray-900 gap-2 "
         >
           <span className="font-medium text-sm ">View</span>
           <Play className="size-4" />
@@ -73,27 +105,61 @@ const PostCard = ({ fromPage = routes.dashboard, post }) => {
           )}
         </div>
         {user.role === "admin" && (
-          <div className="flex items-center gap-4 mt-4">
-            <p>Update status to : </p>
-            <Button
-              variant="outline"
-              className={`${
-                post.status === "verified"
-                  ? "text-red-400 border-red-500 hover:text-red-500/90"
-                  : "text-teal-500 border-teal-500 hover:text-teal-500/90"
-              }`}
-            >
-              {post.status === "verified" ? "Pending" : "Verified"}
-            </Button>
+          <div className="mt-4 flex items-center gap-7 ">
+            {post.status === "verified" && (
+              <Button
+                onClick={handleDeletePost}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-red-400 hover:bg-red-400/90"
+              >
+                <p className="capitalize text-base font-semibold">Delete</p>
+                <Trash className="size-5" />
+              </Button>
+            )}
+            {(post.status === "pending" || post.status === "rejected") && (
+              <>
+                <Button
+                  onClick={() => handleStatusUpdate("verified")}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-custom-100 hover:bg-custom-100/90"
+                >
+                  <p className="capitalize text-base font-semibold">Verify</p>
+                  <CircleCheckBig className="size-5" />
+                </Button>
+                {post.status !== "rejected" && (
+                  <Button
+                    onClick={() => handleStatusUpdate("rejected")}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-white bg-red-400 hover:bg-red-400/90"
+                  >
+                    <p className="capitalize text-base font-semibold">Reject</p>
+                    <CircleOff className="size-5" />
+                  </Button>
+                )}
+              </>
+            )}
           </div>
         )}
       </div>
+      <div
+        className={`self-start mr-10 flex items-center gap-2 px-3 py-2 rounded-lg text-white    ${
+          post.status === "pending" ? "bg-[#8B8B8B]" : "bg-custom-100"
+        } `}
+      >
+        <p className={`capitalize text-base font-semibold`}>{post.status}</p>
+        {post.status === "pending" ? (
+          <Clock className="size-5" />
+        ) : (
+          <CircleCheckBig className="size-5" />
+        )}
+      </div>
       <figure
-        className={`h-[250px] flex justify-center ${
+        className={` w-full ${
           fromPage === routes.dashboard ? "flex-[.3]" : "flex-[.4]"
         }`}
       >
-        <img src={post.image} alt="post image" className="rounded-xl h-full" />
+        <img
+          src={post.image}
+          alt="post image"
+          className="rounded-xl max-h-[250px] w-full object-contain"
+        />
       </figure>
     </li>
   );

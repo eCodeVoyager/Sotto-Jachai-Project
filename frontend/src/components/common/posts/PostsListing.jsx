@@ -2,7 +2,7 @@ import PostCard from "./PostCard";
 import { routes } from "@/router/routes.data";
 import PostsPaginate from "./PostsPaginate";
 
-const PostsListing = ({ fromPage, Icon, title, contents, limit = 2 }) => {
+const PostsListing = ({ fromPage, Icon, title, contents, limit = 3 }) => {
   return (
     <section
       className={`${
@@ -33,7 +33,7 @@ const PostsListing = ({ fromPage, Icon, title, contents, limit = 2 }) => {
           <div className="mt-9 pb-5 md:pb-0">
             <PostsPaginate
               contents={contents?.slice().reverse()}
-              itemsPerPage={3}
+              itemsPerPage={limit}
             />
           </div>
         </>

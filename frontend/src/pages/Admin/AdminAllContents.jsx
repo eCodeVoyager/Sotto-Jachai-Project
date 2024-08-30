@@ -13,6 +13,7 @@ const AdminAllContents = () => {
         contents={verifiedContents}
         title={"All Contents"}
         Icon={MyContentsIcon}
+        limit={2}
       />
     </section>
   );

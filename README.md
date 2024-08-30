@@ -2,11 +2,13 @@ Here's the updated version of the **Sotto-Jachai Project** overview with the req
 
 ---
 
-# 📊 **Sotto-Jachai Project**
+<img src="./logo.svg" alt="Sotto-Jachai logo" width="250" />
+
+# 📊 **Sotto-Jachai Project Overview**
 
 ## Project Overview
 
-Sotto-Jachai is a secure system designed to prevent propaganda and false information, particularly during mass protests. Utilizing the MERN stack (MongoDB, Express.js, React.js, Node.js) and advanced cryptography with 128-bit small hashing, the system ensures data integrity and security. Organizers can log in, submit content, and the data is hashed and verified by an admin team. Users can then verify the content using a key, ensuring that only truthful and validated information is shared.
+Sotto-Jachai is a secure system designed to prevent propaganda and false information, particularly during mass movement. Utilizing the MERN stack (MongoDB, Express.js, React.js, Node.js) and advanced cryptography with 128-bit small hashing, the system ensures data integrity and security. Organizers can log in, submit content, and the data is hashed and verified by an admin team. Users can then verify the content using a key, ensuring that only truthful and validated information is shared.
 
 ---
 
@@ -28,7 +30,7 @@ Sotto-Jachai is a secure system designed to prevent propaganda and false informa
 
 ## 🖥️ **Frontend**
 
-### **Technologies Used**
+### **Frontend Technologies Used**
 
 ![React.js](https://img.shields.io/badge/React.js-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)
@@ -36,7 +38,7 @@ Sotto-Jachai is a secure system designed to prevent propaganda and false informa
 ![Shadcn UI](https://img.shields.io/badge/Shadcn%20UI-333333?style=for-the-badge&logo=shadcn&logoColor=white)
 ![React Router](https://img.shields.io/badge/React%20Router-CC0000?style=for-the-badge&logo=react-router&logoColor=white)
 
-### **Deployment**
+### **Deployment Instructions**
 
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
@@ -49,20 +51,25 @@ Sotto-Jachai is a secure system designed to prevent propaganda and false informa
 - **State Management**: Managed with Redux for efficient state handling.
 - **Real-time Updates**: New post creation and status updates provide a real-time experience.
 
-### **Setup Instructions**
+### **Setup Instructions for Frontend**
 
 1. Clone the repository:
+
    ```bash
-   git clone https://github.com/yourusername/Sotto-Jachai-Frontend.git
+   git clone https://github.com/eCodeVoyager/Sotto-Jachai-Project.git
    ```
+
 2. Install dependencies:
+
    ```bash
-   cd Sotto-Jachai-Frontend
+   cd Sotto-Jachai-Project/frontend
    npm install
    ```
+
 3. Start the development server:
+
    ```bash
-   npm start
+   npm run dev
    ```
 
 ---
@@ -75,7 +82,6 @@ Sotto-Jachai is a secure system designed to prevent propaganda and false informa
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
-![Passport.js](https://img.shields.io/badge/Passport.js-34E27A?style=for-the-badge&logo=passport&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
 ![OAuth2](https://img.shields.io/badge/OAuth2-3EAAAF?style=for-the-badge&logo=oauth&logoColor=white)
 ![Joi](https://img.shields.io/badge/Joi-338833?style=for-the-badge&logo=joi&logoColor=white)
@@ -93,18 +99,23 @@ Sotto-Jachai is a secure system designed to prevent propaganda and false informa
 ### **Setup Instructions**
 
 1. Clone the repository:
+
    ```bash
-   git clone https://github.com/yourusername/Sotto-Jachai-Backend.git
+   git clone git clone https://github.com/eCodeVoyager/Sotto-Jachai-Project.git
    ```
+
 2. Install dependencies:
+
    ```bash
-   cd Sotto-Jachai-Backend
+   cd Sotto-Jachai-Project/backend
    npm install
    ```
+
 3. Set up environment variables:
    - Create a `.env` file in the root directory.
    - Add the necessary environment variables, such as database connection strings, secret keys, etc.
 4. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -126,23 +137,24 @@ We welcome contributions! Please fork the repository and submit a pull request f
 
 - **Salman Farsi**
 
-  - [GitHub](https://github.com/sa)
+  - [@devwithfarshi](https://github.com/devwithfarshi)
 
 - **Mohiuddin Al Ehsan**
 
-  - [GitHub](https://github.com/ehsan-profile)
+  - [@eCodeVoyager](https://github.com/eCodeVoyager)
 
 - **Sanaur Khan**
-  - [GitHub](https://github.com/sanaur-profile)
-
----
-
-## 📜 **License**
-
-This project is licensed under the MIT License.
+  - [@sanuarKhan](https://github.com/sanuarKhan)
 
 ---
 
 ## 📬 **Contact**
 
 For any inquiries or support, please reach out to any of our member thought email.
+
+- **MD Salman Farshi** - Frontend developer
+  - [devwithfarshi@gmail.com](mailto:devwithfarshi@gmail.com)
+- **Mohiuddin al ehsan** - Backend developer
+  - [work.alehsan@gmail.com](mailto:work.alehsan@gmail.com)
+- **Sanuar Khan** - Project manager
+  - [khanthesanuar@gmail.com](mailto:khanthesanuar@gmail.com)

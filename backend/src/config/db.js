@@ -1,4 +1,5 @@
-// src/config/db.js
+// Database Configuration And Connection File
+
 const mongoose = require("mongoose");
 
 const ConnectDB = async () => {

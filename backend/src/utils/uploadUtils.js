@@ -1,8 +1,7 @@
-// src/utils/uploadUtils.js
 
-const cloudinary = require("../config/cloudinary");
 const ApiError = require("./apiError");
 const httpStatus = require("http-status");
+const cloudinary = require("../config/cloudinary");
 
 /**
  * Uploads a file to Cloudinary.

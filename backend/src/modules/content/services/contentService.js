@@ -1,7 +1,7 @@
+const httpStatus = require("http-status");
+const ApiError = require("../../../utils/apiError");
 const contentModel = require("../models/contentModel");
 const { generateKey } = require("../../../utils/hashUtils");
-const ApiError = require("../../../utils/apiError");
-const httpStatus = require("http-status");
 const verifyModel = require("../../verify/models/verifyModel");
 
 /**
@@ -61,6 +61,12 @@ const verifyContent = async (contentId, status) => {
   }
 };
 
+/**
+ * Gets contents.
+ * @param {Object} filter - The filter object.
+ * @returns {Promise<Object>} The promise object that represents the contents.
+ */
+
 const getContents = async (filter) => {
   try {
     return await contentModel.find(filter).populate([
@@ -77,6 +83,12 @@ const getContents = async (filter) => {
     throw error;
   }
 };
+
+/**
+ * Gets content.
+ * @param {String} contentId - The ID of the content to get.
+ * @returns {Promise<Object>} The promise object that represents the content.
+ */
 
 const getContent = async (contentId) => {
   try {
@@ -95,6 +107,12 @@ const getContent = async (contentId) => {
   }
 };
 
+/**
+ * Deletes content.
+ * @param {String} contentId - The ID of the content to delete.
+ * @returns {Promise<Object>} The promise object that represents the deleted content.
+ */
+
 const deleteContent = async (contentId) => {
   try {
     const content = await contentModel.findByIdAndDelete(contentId);
@@ -106,7 +124,11 @@ const deleteContent = async (contentId) => {
     throw error;
   }
 };
-
+/**
+ * Gets key by content ID.
+ * @param {String} contentId - The ID of the content to get the key for.
+ * @returns {Promise<Object>} The promise object that represents the key.
+ */
 const getKeybyContentId = async (contentId) => {
   try {
     return await verifyModel.findOne({ content: contentId });

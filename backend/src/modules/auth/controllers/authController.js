@@ -1,10 +1,17 @@
 const httpStatus = require("http-status");
-
 const ApiError = require("../../../utils/apiError");
 const ApiResponse = require("../../../utils/apiResponse");
-const { generateAccessToken } = require("../../../utils/jwtToken");
 const userService = require("../../users/services/userService");
+const { generateAccessToken } = require("../../../utils/jwtToken");
 
+/**
+ * Register a new user.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {Promise<Object>} The promise object that represents the registered user.
+ *
+ */
 const registerUser = async (req, res, next) => {
   try {
     const user = await userService.createUser(req.body);
@@ -20,6 +27,15 @@ const registerUser = async (req, res, next) => {
     return next(error);
   }
 };
+
+/**
+ * Login a user.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {Promise<Object>} The promise object that represents the login status.
+ *
+ */
 
 const loginUser = async (req, res, next) => {
   try {
@@ -49,6 +65,14 @@ const loginUser = async (req, res, next) => {
   }
 };
 
+/**
+ * Register a new admin.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {Promise<Object>} The promise object that represents the registered admin.
+ */
+
 const registerAdmin = async (req, res, next) => {
   try {
     req.body.role = "admin";
@@ -74,6 +98,15 @@ const registerAdmin = async (req, res, next) => {
     return next(error);
   }
 };
+
+/**
+ * Login an admin.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {Promise<Object>} The promise object that represents the login status.
+ *
+ */
 
 const loginAdmin = async (req, res, next) => {
   try {
@@ -104,6 +137,14 @@ const loginAdmin = async (req, res, next) => {
   }
 };
 
+/**
+ * Get the logged in user details.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {Promise<Object>} The promise object that represents the logged in user details.
+ *
+ */
 const loggedInUser = async (req, res, next) => {
   try {
     const user = await userService.getUserById(req.user.id);

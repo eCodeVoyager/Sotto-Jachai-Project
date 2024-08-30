@@ -1,10 +1,8 @@
-//src/modules/auth/routes/authRoutes.js
-
 const router = require("express").Router();
 const authController = require("../controllers/authController");
+const authValidation = require("../validations/authValidation");
 const authenticate = require("../../../middlewares/authMiddleware");
 const validate = require("../../../middlewares/validatorMiddleware");
-const authValidation = require("../validations/authValidation");
 
 // Local authentication routes
 router.get("/me", authenticate, authController.loggedInUser);

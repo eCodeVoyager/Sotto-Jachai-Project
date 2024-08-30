@@ -1,5 +1,4 @@
-//src/middleware/validatorMiddleware.js
-
+//  Middleware to validate request data using Joi schema.
 const Joi = require("joi");
 const { pick } = require("lodash");
 const httpStatus = require("http-status");

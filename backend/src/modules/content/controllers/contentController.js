@@ -1,10 +1,10 @@
-const contentService = require("../services/contentService");
-const ApiResponse = require("../../../utils/apiResponse");
-const httpStatus = require("http-status");
 const {
   uploadFile,
   uploadMultipleFiles,
 } = require("../../../utils/uploadUtils");
+const httpStatus = require("http-status");
+const ApiResponse = require("../../../utils/apiResponse");
+const contentService = require("../services/contentService");
 
 /**
  * Submits content, handling both single and multiple file uploads to Cloudinary.
@@ -21,7 +21,6 @@ const submitContent = async (req, res, next) => {
 
     // Process files if they exist
     if (req.files && req.files.length > 0) {
-      // Filter and upload images
       const imageFiles = req.files.filter((file) =>
         file.mimetype.startsWith("image/")
       );
@@ -44,15 +43,13 @@ const submitContent = async (req, res, next) => {
       }
     }
 
-    // Add the media URLs to the content body if they exist
     const contentBody = {
       ...req.body,
       image: imageUrls,
       video: videoUrls,
-      status: "pending", // Set default status to 'pending'
+      status: "pending",
     };
 
-    // Submit the content using the content service
     const content = await contentService.submitContent(
       contentBody,
       req.user.id
@@ -134,6 +131,15 @@ const getContents = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Gets content by id.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {Promise<Object>} The promise object that represents the content.
+ *
+ */
 
 const getContent = async (req, res, next) => {
   try {

@@ -1,6 +1,6 @@
-const verifyService = require("../services/verifyService");
-const ApiResponse = require("../../../utils/apiResponse");
 const httpStatus = require("http-status");
+const ApiResponse = require("../../../utils/apiResponse");
+const verifyService = require("../services/verifyService");
 
 /**
  * Gets content by key.

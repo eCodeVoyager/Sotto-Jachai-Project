@@ -1,20 +1,21 @@
+// Load environment variables
 require("dotenv").config();
-// src/app.js
 
-const express = require("express");
+// - npm packages
+const hpp = require("hpp");
 const cors = require("cors");
-const morgan = require("morgan");
 const helmet = require("helmet");
+const morgan = require("morgan");
+const express = require("express");
+const bodyParser = require("body-parser");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
-const hpp = require("hpp");
-const bodyParser = require("body-parser");
 
-// Import routes
-const { auth, verify, content } = require("./index");
+// - custom error handling and routes
+const { verify, auth, content } = require("./index");
+const { errorHandler, notFoundHandler } = require("./utils/errorHandler");
 
 const app = express();
-
 
 //Middlewares
 const allMiddlewares = [
@@ -39,7 +40,7 @@ app.get("/", (_, res) => {
     message: "Welcome to the Sotto-Jachai API😀",
     status: "Success✅",
     server_status: "Working🆙",
-    server_time: new Date().toLocaleString() + "⌛",
+    server_time: `${new Date().toLocaleString()}⌛`,
   });
 });
 // Use routes
@@ -48,8 +49,6 @@ app.use("/api/v1/verify", verify.verifyRoutes);
 app.use("/api/v1/content", content.contentRoutes);
 
 // Error handling middleware
-const { errorHandler, notFoundHandler } = require("./utils/errorHandler");
-
 app.use(notFoundHandler);
 app.use(errorHandler);
 

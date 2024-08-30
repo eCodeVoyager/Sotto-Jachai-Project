@@ -1,7 +1,7 @@
-const keyModel = require("../models/verifyModel");
-const contentService = require("../../content/services/contentService");
-const ApiError = require("../../../utils/apiError");
 const httpStatus = require("http-status");
+const keyModel = require("../models/verifyModel");
+const ApiError = require("../../../utils/apiError");
+const contentService = require("../../content/services/contentService");
 
 /**
  * Gets content by key.

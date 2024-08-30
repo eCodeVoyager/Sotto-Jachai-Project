@@ -1,12 +1,12 @@
-
-const verifyController = require('./controllers/verifyController');
-const verifyRoutes = require('./routes/verifyRoutes');
-const verifyService = require('./services/verifyService');
-const verifyModel = require('./models/verifyModel');
+// Index file for verify module
+const verifyModel = require("./models/verifyModel");
+const verifyRoutes = require("./routes/verifyRoutes");
+const verifyService = require("./services/verifyService");
+const verifyController = require("./controllers/verifyController");
 
 module.exports = {
-    verifyController,
-    verifyRoutes,
-    verifyService,
-    verifyModel,
-    };
+  verifyController,
+  verifyRoutes,
+  verifyService,
+  verifyModel,
+};

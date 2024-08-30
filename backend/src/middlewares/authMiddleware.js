@@ -1,4 +1,4 @@
-//src/middleware/authMiddleware.js
+//  Middleware to authenticate user by verifying token
 
 const ApiError = require("../utils/apiError");
 const { verifyAccessToken } = require("../utils/jwtToken");

@@ -1,6 +1,5 @@
 // - npm packages
 const jwt = require('jsonwebtoken');
-
 const jwtConfig = require('../config/jwt');
 
 /**

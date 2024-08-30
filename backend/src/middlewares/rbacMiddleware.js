@@ -1,3 +1,4 @@
+//  Middleware to enforce role-based access control (RBAC).
 
 const roles = require("../config/roles");
 const httpStatus = require("http-status");
@@ -15,7 +16,6 @@ const authorize = (allowedPermissions) => {
       const userRole = req.user.role;
       const userPermissions = roles[userRole]?.can || [];
 
-      // Check if user has at least one of the required permissions
       const hasPermission = allowedPermissions.some((permission) =>
         userPermissions.includes(permission)
       );
@@ -24,7 +24,6 @@ const authorize = (allowedPermissions) => {
         return next();
       }
 
-      // Respond with forbidden status if permission is denied
       return next(
         new ApiError(
           httpStatus.FORBIDDEN,

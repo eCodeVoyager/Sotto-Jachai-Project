@@ -1,11 +1,11 @@
 //Server keep alive script
 
 const axios = require("axios");
+const cron = require("node-cron");
 
 const SERVER_URL = `${process.env.BACKEND_SERVER_URL}`;
 
-const INTERVAL_TIME = 1 * 60 * 1000; // 10 minutes
-
+// Function to keep the server alive
 const keepServerAlive = () => {
   axios
     .get(SERVER_URL)
@@ -19,5 +19,6 @@ const keepServerAlive = () => {
     });
 };
 
+cron.schedule("*/1 * * * *", keepServerAlive); //10 minutes
+
 keepServerAlive();
-setInterval(keepServerAlive, INTERVAL_TIME);

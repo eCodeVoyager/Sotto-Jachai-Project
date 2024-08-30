@@ -8,6 +8,7 @@ import { Formik } from "formik";
 import { Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import Cookie from "js-cookie";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -36,13 +37,22 @@ const Register = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           AuthService.register(values)
-            .then((data) => {
+            .then(({ data }) => {
               console.log(data);
-              toast.success("Registration successful");
+              Cookie.set("token", data.token);
+              toast.success("Registration successful.");
               setSubmitting(false);
+              navigate(routes.dashboard);
             })
             .catch((error) => {
+              console.log("Error while registering user.");
               console.log(error);
+              setSubmitting(false);
+              toast.error(
+                error.response?.data?.message ||
+                  error.message ||
+                  "Registration failed."
+              );
             });
         }}
       >
@@ -64,7 +74,7 @@ const Register = () => {
                 <Input
                   size="lg"
                   placeholder="name@mail.com"
-                  autofocus="true"
+                  autoFocus="true"
                   type="email"
                   name="email"
                   onChange={handleChange}

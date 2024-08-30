@@ -8,7 +8,6 @@ import Verification from "./pages/Verification";
 import DashBoardLayout from "./components/Layouts/DashBoardLayout";
 import ContentSubmission from "./pages/ContentSubmission";
 import MyContents from "./pages/MyContents";
-import MyProfile from "./pages/MyProfile";
 import AdminLogin from "./pages/AdminLogin";
 
 const App = () => {
@@ -36,11 +35,10 @@ const App = () => {
               element={<ContentSubmission />}
             />
             <Route path={routes.myContent} element={<MyContents />} />
-            <Route path={routes.myProfile} element={<MyProfile />} />
           </Route>
           {/* dashboard routes end */}
-          {/* </Route> */}
         </Route>
+        {/* </Route> */}
       </Routes>
     </>
   );

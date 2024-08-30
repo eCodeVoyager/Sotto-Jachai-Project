@@ -6,13 +6,16 @@ export const routes = {
   myContent: "/mycontent",
   login: "/login",
   register: "/register",
-  adminLogin: "/admin-login",
+  adminLogin: "/admin/login",
+  adminRegister: "/admin/register",
   verification: "/verification",
+  adminAllContent: "/admin/allcontent",
+  adminDashboard: "/admin/dashboard",
 };
 
 // dashboard navigation
 
-export const navigation = [
+export const userNavigation = [
   {
     id: "1",
     title: "Dashboard",
@@ -23,6 +26,20 @@ export const navigation = [
     id: "4",
     title: "My Contents",
     href: routes.myContent,
+    icon: MyContentsIcon,
+  },
+];
+export const adminNavigation = [
+  {
+    id: "1",
+    title: "Dashboard",
+    href: routes.adminDashboard,
+    icon: DashboardIcon,
+  },
+  {
+    id: "4",
+    title: "All Contents",
+    href: routes.adminAllContent,
     icon: MyContentsIcon,
   },
 ];

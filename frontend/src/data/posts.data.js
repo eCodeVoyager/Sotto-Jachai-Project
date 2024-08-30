@@ -4,7 +4,8 @@ export const demoPost = {
   text: "Prose is a form of written language that follows a natural flow of speech and grammatical structure, unlike poetry which often has a rhythmic pattern. It is the most common form of writing, used in novels, articles, essays, and everyday communication. Prose can be either fiction or nonfiction and varies in style, tone, and complexity. It is characterized by complete sentences and paragraphs rather than line breaks. Overall, prose is versatile, allowing for a wide range of expression and storytelling",
   image: ["/demo-post.jpg"],
   video: [],
-  status: "verified",
+  // status: "verified",
+  status: "pending",
   submittedBy: {
     _id: "66d08f15b84cd08394c30a00",
     email: "admin1@admin.com",

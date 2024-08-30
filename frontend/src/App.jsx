@@ -9,6 +9,10 @@ import DashBoardLayout from "./components/Layouts/DashBoardLayout";
 import ContentSubmission from "./pages/ContentSubmission";
 import MyContents from "./pages/MyContents";
 import AdminLogin from "./pages/AdminLogin";
+import AdminRequire from "./components/Auth/AdminRequire";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AdminAllContents from "./pages/Admin/AdminAllContents";
+import AdminRegister from "./pages/AdminRegister";
 
 const App = () => {
   return (
@@ -20,6 +24,7 @@ const App = () => {
               ============= */}
           <Route path={routes.login} element={<Login />} />
           <Route path={routes.register} element={<Register />} />
+          <Route path={routes.adminRegister} element={<AdminRegister />} />
           <Route path={routes.adminLogin} element={<AdminLogin />} />
           <Route path={routes.verification} element={<Verification />} />
           {/*==============
@@ -35,6 +40,17 @@ const App = () => {
                 element={<ContentSubmission />}
               />
               <Route path={routes.myContent} element={<MyContents />} />
+              {/* admin require routes */}
+              <Route element={<AdminRequire />}>
+                <Route
+                  path={routes.adminDashboard}
+                  element={<AdminDashboard />}
+                />
+                <Route
+                  path={routes.adminAllContent}
+                  element={<AdminAllContents />}
+                />
+              </Route>
             </Route>
             {/* dashboard routes end */}
           </Route>

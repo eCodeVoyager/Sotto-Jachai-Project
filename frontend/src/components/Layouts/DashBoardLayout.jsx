@@ -7,11 +7,13 @@ import { fetchLogInUser } from "@/redux/app/auth/fetchLoginUser";
 import { routes } from "@/router/routes.data";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
+import { fetchLoginUserContents } from "@/redux/app/content/fetchLoginUserContents";
+import { fetchUsersContents } from "@/redux/app/admin/fetchUsersContents";
 
 const DashBoardLayout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, isAuthenticated, user } = useSelector(
+  const { user, isLoading, isAuthenticated } = useSelector(
     (state) => state.auth
   );
   useEffect(() => {
@@ -20,11 +22,21 @@ const DashBoardLayout = () => {
     } else {
       navigate(routes.login, { replace: true });
     }
+  }, []);
+  useEffect(() => {
+    if (user) {
+      if (user.role === "user") {
+        dispatch(fetchLoginUserContents());
+      } else if (user.role === "admin") {
+        dispatch(fetchUsersContents());
+        navigate(routes.adminDashboard);
+      }
+    }
   }, [user]);
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <Loader2 size="50" />
+        <Loader2 className="animate-spin" size="50" />
       </div>
     );
   }

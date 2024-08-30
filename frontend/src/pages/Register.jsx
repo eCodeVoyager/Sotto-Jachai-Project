@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { routes } from "@/router/routes.data";
 import AuthService from "@/services/AuthService";
-import { Checkbox, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { Formik } from "formik";
 import { Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ const Register = () => {
       subtitle={"Nice to meet you! Enter your details to register."}
     >
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ name: "", email: "", password: "" }}
         validate={(values) => {
           const errors = {};
           if (!values.email) {
@@ -32,6 +32,11 @@ const Register = () => {
             errors.password = "Password is required!";
           } else if (values.password.length < 6) {
             errors.password = "Password must be at least 6 characters";
+          }
+          if (!values.name) {
+            errors.name = "Name is required!";
+          } else if (values.name.length < 3) {
+            errors.name = "Name must be at least 3 characters";
           }
           return errors;
         }}
@@ -68,13 +73,30 @@ const Register = () => {
           <form onSubmit={handleSubmit} className="mt-8 mb-2 w-full sm:w-96">
             <div className="mb-1 flex flex-col gap-6">
               <Typography variant="h6" color="blue-gray" className="-mb-3">
+                Your Name
+              </Typography>
+              <div>
+                <Input
+                  size="lg"
+                  placeholder="Jon doe"
+                  autoFocus="true"
+                  type="text"
+                  name="name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                />
+                <p className="mt-1 text-red-500 text-sm">
+                  {errors.name && touched.name && errors.name}
+                </p>
+              </div>
+              <Typography variant="h6" color="blue-gray" className="-mb-3">
                 Your Email
               </Typography>
               <div>
                 <Input
                   size="lg"
                   placeholder="name@mail.com"
-                  autoFocus="true"
                   type="email"
                   name="email"
                   onChange={handleChange}
@@ -103,7 +125,7 @@ const Register = () => {
                 </p>
               </div>
             </div>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <Checkbox
                 label={
                   <Typography
@@ -118,7 +140,7 @@ const Register = () => {
                   </Typography>
                 }
               />
-            </div>
+            </div> */}
             <Button
               disabled={isSubmitting}
               className="mt-6 w-full uppercase flex justify-center"

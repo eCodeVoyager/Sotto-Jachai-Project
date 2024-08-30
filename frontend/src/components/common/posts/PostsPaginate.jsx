@@ -1,10 +1,8 @@
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import PostCard from "./PostCard";
-import { demoPost } from "@/data/posts.data";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const items = [demoPost, demoPost, demoPost, demoPost, demoPost, demoPost];
 function Items({ currentItems }) {
   return (
     <>
@@ -13,15 +11,14 @@ function Items({ currentItems }) {
     </>
   );
 }
-const PostsPaginate = ({ itemsPerPage }) => {
+const PostsPaginate = ({ contents, itemsPerPage }) => {
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+  const currentItems = contents.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(contents.length / itemsPerPage);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log();
+    const newOffset = (event.selected * itemsPerPage) % contents.length;
     setItemOffset(newOffset);
   };
 

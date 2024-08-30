@@ -96,6 +96,7 @@ const getContent = async (contentId) => {
 const deleteContent = async (contentId) => {
   try {
     const content = await Content.findByIdAndDelete(contentId);
+    await verifyModel.findOneAndDelete({ contentId });
     if (!content) {
       throw new ApiError(httpStatus.NOT_FOUND, "Content not found");
     }

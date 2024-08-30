@@ -1,12 +1,9 @@
 const joi = require("joi");
 
-const CreateContent = {
-  body: joi.object().keys({
-    title: joi.string().required().min(3),
-    text: joi.string(),
-  }),
-};
-
+const CreateContent = joi.object().keys({
+  title: joi.string().required().min(3),
+  text: joi.string(),
+});
 const verifyContent = {
   params: joi.object().keys({
     id: joi.string().required(),

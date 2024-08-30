@@ -1,14 +1,4 @@
 // src/config/db.js
-
-/**
- * Database connection file.
- *
- * @requires mongoose
- * @description This file connects to the MongoDB database.
- * @exports {Function} ConnectDB - The function to connect to the database.
- *
- */
-
 const mongoose = require("mongoose");
 
 const ConnectDB = async () => {

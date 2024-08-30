@@ -9,12 +9,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Logs } from "lucide-react";
-import { useSelector } from "react-redux";
+import { LogOut, Logs } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "../ui/button";
+import { logout } from "@/redux/app/auth/authSlice";
+import Cookie from "js-cookie";
 const Sidebar = () => {
   const { user: userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigation =
     userInfo.role === "admin" ? adminNavigation : userNavigation;
+
+  const handleLogOut = () => {
+    dispatch(logout());
+    Cookie.remove("token");
+    Cookie.remove("role");
+  };
   return (
     <>
       <div className="w-full md:w-64 h-full bg-custom-50 overflow-y-auto md:rounded-2xl py-4 flex items-center justify-between md:items-stretch md:justify-normal md:flex-col px-4 md:px-0">
@@ -45,14 +55,22 @@ const Sidebar = () => {
             ))}
           </ul>
         </div>
-        <div className="h-20 hidden md:flex justify-center gap-3">
-          <figure>
-            <img src={profile_icon_sidebar} alt="profile_icon_sidebar" />
-          </figure>
-          <div>
-            <h2 className="text-gray-700 font-semibold ">{userInfo.name}</h2>
-            <h4 className="text-muted-foreground text-sm">{userInfo.email}</h4>
+        <div className="h-30 hidden md:flex items-start flex-col gap-y-4">
+          <div className="flex justify-center gap-3">
+            <figure>
+              <img src={profile_icon_sidebar} alt="profile_icon_sidebar" />
+            </figure>
+            <div>
+              <h2 className="text-gray-700 font-semibold ">{userInfo.name}</h2>
+              <h4 className="text-muted-foreground text-sm">
+                {userInfo.email}
+              </h4>
+            </div>
           </div>
+          <Button onClick={handleLogOut} className="gap-2 mx-auto">
+            <LogOut />
+            <p>Logout</p>
+          </Button>
         </div>
         <div className="md:hidden">
           <DropdownMenu>

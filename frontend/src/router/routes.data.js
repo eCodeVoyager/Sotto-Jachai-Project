@@ -2,7 +2,7 @@ import { DashboardIcon, MyContentsIcon } from "@/components/common/Icons";
 
 export const routes = {
   dashboard: "/",
-  contentSubmission: "/mycontent/content-submission",
+  contentSubmission: "/content-submission",
   myContent: "/mycontent",
   login: "/login",
   register: "/register",
@@ -25,6 +25,12 @@ export const userNavigation = [
     id: "4",
     title: "My Contents",
     href: routes.myContent,
+    icon: MyContentsIcon,
+  },
+  {
+    id: "6",
+    title: "Create new content",
+    href: routes.contentSubmission,
     icon: MyContentsIcon,
   },
 ];

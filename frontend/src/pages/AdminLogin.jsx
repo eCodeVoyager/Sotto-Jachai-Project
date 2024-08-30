@@ -39,8 +39,8 @@ const AdminLogin = () => {
               console.log(data);
               Cookie.set("token", data.token);
               toast.success("Admin Login successful.");
+              navigate(routes.dashboard);
               setSubmitting(false);
-              navigate(routes.adminDashboard);
             })
             .catch((error) => {
               console.log("Error while Admin Login.");

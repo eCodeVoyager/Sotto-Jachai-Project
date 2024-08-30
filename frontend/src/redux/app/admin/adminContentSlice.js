@@ -9,6 +9,22 @@ const initialState = {
 export const adminContentSlice = createSlice({
   name: "adminContent",
   initialState,
+  reducers: {
+    contentStatusUpdate: (state, { payload }) => {
+      const { postId, status } = payload;
+      const index = state.allContents.findIndex(
+        (content) => content._id === postId
+      );
+      state.allContents[index].status = status;
+    },
+    contentDelete: (state, { payload }) => {
+      const { postId } = payload;
+      const index = state.allContents.findIndex(
+        (content) => content._id === postId
+      );
+      state.allContents.splice(index, 1);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchUsersContents.pending, (state) => {
       state.isLoading = true;
@@ -24,4 +40,5 @@ export const adminContentSlice = createSlice({
   },
 });
 
+export const { contentStatusUpdate, contentDelete } = adminContentSlice.actions;
 export default adminContentSlice.reducer;

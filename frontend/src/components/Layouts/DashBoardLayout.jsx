@@ -16,6 +16,7 @@ const DashBoardLayout = () => {
   const { user, isLoading, isAuthenticated } = useSelector(
     (state) => state.auth
   );
+
   useEffect(() => {
     if (Cookie.get("token")) {
       dispatch(fetchLogInUser());

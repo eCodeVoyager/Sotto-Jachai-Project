@@ -9,6 +9,11 @@ const initialState = {
 export const contentSlice = createSlice({
   name: "content",
   initialState,
+  reducers: {
+    createContent: (state, action) => {
+      state.contents.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchLoginUserContents.pending, (state) => {
       state.isLoading = true;
@@ -23,5 +28,6 @@ export const contentSlice = createSlice({
     });
   },
 });
+export const { createContent } = contentSlice.actions;
 
 export default contentSlice.reducer;

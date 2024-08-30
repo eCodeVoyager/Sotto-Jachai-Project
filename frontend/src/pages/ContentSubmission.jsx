@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { createContent } from "@/redux/app/content/contentSlice";
 import ContentService from "@/services/ContentService";
 import { Formik } from "formik";
 import { CloudUpload, Loader2, PenLine } from "lucide-react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 
 const ContentSubmission = () => {
+  const dispatch = useDispatch();
   const [uploadedFiles, setUploadedFiles] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -53,6 +56,7 @@ const ContentSubmission = () => {
             ContentService.create(formData)
               .then(({ data }) => {
                 console.log(data);
+                dispatch(createContent(data));
                 toast.success("Content created successfully.");
                 setSubmitting(false);
                 values.title = "";

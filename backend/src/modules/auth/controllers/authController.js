@@ -59,7 +59,7 @@ const registerUser = async (req, res, next) => {
 
 const loginUser = async (req, res, next) => {
   try {
-    const user = await userService.getUserByEmail(req.body.email);
+    const user = await userService.getUnprotectedUser(req.body);
     if (!user) {
       throw new ApiError(httpStatus.UNAUTHORIZED, "User not registered");
     }
@@ -98,7 +98,7 @@ const registerAdmin = async (req, res, next) => {
 
 const loginAdmin = async (req, res, next) => {
   try {
-    const user = await userService.getUserByEmail(req.body.email);
+    const user = await userService.getUnprotectedUser(req.body);
     if (!user) {
       throw new ApiError(httpStatus.UNAUTHORIZED, "Admin not registered");
     }
